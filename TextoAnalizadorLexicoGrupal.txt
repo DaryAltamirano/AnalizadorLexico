@@ -1,0 +1,29 @@
+var count: Int = 10
+val
++ - *
+> < 
+and or 
+if 
+while {}
+setOf()
+listOf()
+and 
+or 
+str
+print("")
+printl("")
+readLine()
+for( a in b ){}
+When(){}
+SubList( inicio , fin): 
+LastIndexOf(element):
+Size():
+Contains(element): 
+fun mostrar(int par1, int par2){}
+2 + 5
+a = 5 * 8
+if i == 5 :
+a = 5
+print(a)
+
+
