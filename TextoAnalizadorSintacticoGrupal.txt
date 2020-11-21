@@ -1,0 +1,7 @@
+##EJEMPLOS DARIEN ALTAMIRANO
+val primos: List < Int > = listOf (2)
+val nombres: List<String> = listOf("Juan")
+val listaMezclada = listOf("Juan", 1, 's') 
+val conjunto: Set<Int> = setOf(1, 3, 4)
+val conjuntoMezclado = setOf(2, 4, "casa", 'c')  
+var pair = Pair("Kotlin Pair",2)
