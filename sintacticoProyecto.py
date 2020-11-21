@@ -57,7 +57,7 @@ def p_ListadeTipoString(p):
      'ListaConTipo : valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN'
      #FALTA BOOL
 def p_ListadeTipoBool(p):
-     'ListaConTipo : valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF LPAREN  RPAREN'
+     'ListaConTipo : valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN  RPAREN'
 #Lista sin tipo
 def p_ListaSinTipo(p):
      'ListaSinTipo : valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier RPAREN'
@@ -70,7 +70,7 @@ def p_ConjuntoTipoString(p):
      'ConjuntoConTipo : valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN'
      #FALTA BOOL
 def p_ConjuntodeTipoBool(p):
-     'ConjuntoConTipo : valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN  RPAREN'
+     'ConjuntoConTipo : valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN  repeBool RPAREN'
 #Lista sin tipo
 def p_ConjuntoSinTipo(p):
      'ConjuntoSinTipo : valovar VARIABLE IGUAL SETOF LPAREN repeCualquier RPAREN'
@@ -92,6 +92,7 @@ def p_Pair(p):
 def p_algunTipo(p):
      '''datosprimitivos : NUMBER 
                | STRINGPALABRA
+               | BOOLEANPALABRA
                | VARIABLE '''
                
 def p_valovar(p):
@@ -116,6 +117,16 @@ def p_repetirString_s(p):
      'repeString : String COMA repeString'
 def p_String(p):
      '''String : STRINGPALABRA
+        | VARIABLE'''
+        # PARA QUE SE REPITA INT 
+
+# (2,4,5,6)
+def p_repetirBool(p):
+     'repeBool : bool'
+def p_repetirBool_B(p):
+     'repeBool : bool COMA repeBool'
+def p_Bool(p):
+     '''bool : BOOLEANPALABRA
         | VARIABLE'''
 
 

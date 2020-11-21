@@ -38,34 +38,40 @@ Rule 13    variableConTipo -> valovar VARIABLE DOSPUNTOS BOOLEAN IGUAL
 Rule 14    variableSinTipo -> valovar VARIABLE IGUAL datosprimitivos
 Rule 15    ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
 Rule 16    ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
-Rule 17    ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF LPAREN RPAREN
+Rule 17    ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN
 Rule 18    ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier RPAREN
 Rule 19    ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
 Rule 20    ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
-Rule 21    ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN RPAREN
+Rule 21    ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
 Rule 22    ConjuntoSinTipo -> valovar VARIABLE IGUAL SETOF LPAREN repeCualquier RPAREN
 Rule 23    pair -> valovar VARIABLE IGUAL PAIR LPAREN datosprimitivos COMA datosprimitivos RPAREN
 Rule 24    datosprimitivos -> NUMBER
 Rule 25    datosprimitivos -> STRINGPALABRA
-Rule 26    datosprimitivos -> VARIABLE
-Rule 27    valovar -> VAR
-Rule 28    valovar -> VAL
-Rule 29    repeInt -> valor
-Rule 30    repeInt -> valor COMA repeInt
-Rule 31    valor -> NUMBER
-Rule 32    valor -> VARIABLE
-Rule 33    repeString -> String
-Rule 34    repeString -> String COMA repeString
-Rule 35    String -> STRINGPALABRA
-Rule 36    String -> VARIABLE
-Rule 37    repeCualquier -> datosprimitivos
-Rule 38    repeCualquier -> datosprimitivos COMA repeCualquier
+Rule 26    datosprimitivos -> BOOLEANPALABRA
+Rule 27    datosprimitivos -> VARIABLE
+Rule 28    valovar -> VAR
+Rule 29    valovar -> VAL
+Rule 30    repeInt -> valor
+Rule 31    repeInt -> valor COMA repeInt
+Rule 32    valor -> NUMBER
+Rule 33    valor -> VARIABLE
+Rule 34    repeString -> String
+Rule 35    repeString -> String COMA repeString
+Rule 36    String -> STRINGPALABRA
+Rule 37    String -> VARIABLE
+Rule 38    repeBool -> bool
+Rule 39    repeBool -> bool COMA repeBool
+Rule 40    bool -> BOOLEANPALABRA
+Rule 41    bool -> VARIABLE
+Rule 42    repeCualquier -> datosprimitivos
+Rule 43    repeCualquier -> datosprimitivos COMA repeCualquier
 
 Terminals, with rules where they appear
 
 AND                  : 
 BOOLEAN              : 13 17 21
-COMA                 : 23 30 34 38
+BOOLEANPALABRA       : 26 40
+COMA                 : 23 31 35 39 43
 DIFERENTE            : 
 DIVIDE               : 
 DOSPUNTOS            : 11 12 13 15 16 17 19 20 21
@@ -82,7 +88,7 @@ MAYORQUE             : 15 16 17 19 20 21
 MENORQUE             : 15 16 17 19 20 21
 MINUS                : 
 MOD                  : 
-NUMBER               : 12 24 31
+NUMBER               : 12 24 32
 OR                   : 
 PAIR                 : 23
 PLUS                 : 
@@ -92,12 +98,12 @@ SET                  : 19 20 21
 SETOF                : 19 20 21 22
 SIZE                 : 
 STRING               : 11 16 20
-STRINGPALABRA        : 11 25 35
+STRINGPALABRA        : 11 25 36
 THEN                 : 
 TIMES                : 
-VAL                  : 28
-VAR                  : 27
-VARIABLE             : 11 12 13 14 15 16 17 18 19 20 21 22 23 26 32 36
+VAL                  : 29
+VAR                  : 28
+VARIABLE             : 11 12 13 14 15 16 17 18 19 20 21 22 23 27 33 37 41
 WHILE                : 
 error                : 
 
@@ -107,16 +113,18 @@ ConjuntoConTipo      : 9
 ConjuntoSinTipo      : 10
 ListaConTipo         : 5
 ListaSinTipo         : 6
-String               : 33 34
+String               : 34 35
+bool                 : 38 39
 conjunto             : 3
-datosprimitivos      : 14 23 23 37 38
+datosprimitivos      : 14 23 23 42 43
 lista                : 1
 pair                 : 4
-repeCualquier        : 18 22 38
-repeInt              : 15 19 30
-repeString           : 16 20 34
+repeBool             : 17 21 39
+repeCualquier        : 18 22 43
+repeInt              : 15 19 31
+repeString           : 16 20 35
 todo                 : 0
-valor                : 29 30
+valor                : 30 31
 valovar              : 11 12 13 14 15 16 17 18 19 20 21 22 23
 variable             : 2
 variableConTipo      : 7
@@ -140,7 +148,7 @@ state 0
     (23) pair -> . valovar VARIABLE IGUAL PAIR LPAREN datosprimitivos COMA datosprimitivos RPAREN
     (15) ListaConTipo -> . valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
     (16) ListaConTipo -> . valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
-    (17) ListaConTipo -> . valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF LPAREN RPAREN
+    (17) ListaConTipo -> . valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN
     (18) ListaSinTipo -> . valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier RPAREN
     (11) variableConTipo -> . valovar VARIABLE DOSPUNTOS STRING IGUAL STRINGPALABRA
     (12) variableConTipo -> . valovar VARIABLE DOSPUNTOS INT IGUAL NUMBER
@@ -148,10 +156,10 @@ state 0
     (14) variableSinTipo -> . valovar VARIABLE IGUAL datosprimitivos
     (19) ConjuntoConTipo -> . valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
     (20) ConjuntoConTipo -> . valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
-    (21) ConjuntoConTipo -> . valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN RPAREN
+    (21) ConjuntoConTipo -> . valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
     (22) ConjuntoSinTipo -> . valovar VARIABLE IGUAL SETOF LPAREN repeCualquier RPAREN
-    (27) valovar -> . VAR
-    (28) valovar -> . VAL
+    (28) valovar -> . VAR
+    (29) valovar -> . VAL
 
     VAR             shift and go to state 13
     VAL             shift and go to state 14
@@ -250,7 +258,7 @@ state 12
     (23) pair -> valovar . VARIABLE IGUAL PAIR LPAREN datosprimitivos COMA datosprimitivos RPAREN
     (15) ListaConTipo -> valovar . VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
     (16) ListaConTipo -> valovar . VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
-    (17) ListaConTipo -> valovar . VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF LPAREN RPAREN
+    (17) ListaConTipo -> valovar . VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN
     (18) ListaSinTipo -> valovar . VARIABLE IGUAL LISTOF LPAREN repeCualquier RPAREN
     (11) variableConTipo -> valovar . VARIABLE DOSPUNTOS STRING IGUAL STRINGPALABRA
     (12) variableConTipo -> valovar . VARIABLE DOSPUNTOS INT IGUAL NUMBER
@@ -258,7 +266,7 @@ state 12
     (14) variableSinTipo -> valovar . VARIABLE IGUAL datosprimitivos
     (19) ConjuntoConTipo -> valovar . VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
     (20) ConjuntoConTipo -> valovar . VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
-    (21) ConjuntoConTipo -> valovar . VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN RPAREN
+    (21) ConjuntoConTipo -> valovar . VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
     (22) ConjuntoSinTipo -> valovar . VARIABLE IGUAL SETOF LPAREN repeCualquier RPAREN
 
     VARIABLE        shift and go to state 15
@@ -266,16 +274,16 @@ state 12
 
 state 13
 
-    (27) valovar -> VAR .
+    (28) valovar -> VAR .
 
-    VARIABLE        reduce using rule 27 (valovar -> VAR .)
+    VARIABLE        reduce using rule 28 (valovar -> VAR .)
 
 
 state 14
 
-    (28) valovar -> VAL .
+    (29) valovar -> VAL .
 
-    VARIABLE        reduce using rule 28 (valovar -> VAL .)
+    VARIABLE        reduce using rule 29 (valovar -> VAL .)
 
 
 state 15
@@ -283,7 +291,7 @@ state 15
     (23) pair -> valovar VARIABLE . IGUAL PAIR LPAREN datosprimitivos COMA datosprimitivos RPAREN
     (15) ListaConTipo -> valovar VARIABLE . DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
     (16) ListaConTipo -> valovar VARIABLE . DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
-    (17) ListaConTipo -> valovar VARIABLE . DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF LPAREN RPAREN
+    (17) ListaConTipo -> valovar VARIABLE . DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN
     (18) ListaSinTipo -> valovar VARIABLE . IGUAL LISTOF LPAREN repeCualquier RPAREN
     (11) variableConTipo -> valovar VARIABLE . DOSPUNTOS STRING IGUAL STRINGPALABRA
     (12) variableConTipo -> valovar VARIABLE . DOSPUNTOS INT IGUAL NUMBER
@@ -291,7 +299,7 @@ state 15
     (14) variableSinTipo -> valovar VARIABLE . IGUAL datosprimitivos
     (19) ConjuntoConTipo -> valovar VARIABLE . DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
     (20) ConjuntoConTipo -> valovar VARIABLE . DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
-    (21) ConjuntoConTipo -> valovar VARIABLE . DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN RPAREN
+    (21) ConjuntoConTipo -> valovar VARIABLE . DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
     (22) ConjuntoSinTipo -> valovar VARIABLE . IGUAL SETOF LPAREN repeCualquier RPAREN
 
     IGUAL           shift and go to state 16
@@ -306,13 +314,15 @@ state 16
     (22) ConjuntoSinTipo -> valovar VARIABLE IGUAL . SETOF LPAREN repeCualquier RPAREN
     (24) datosprimitivos -> . NUMBER
     (25) datosprimitivos -> . STRINGPALABRA
-    (26) datosprimitivos -> . VARIABLE
+    (26) datosprimitivos -> . BOOLEANPALABRA
+    (27) datosprimitivos -> . VARIABLE
 
     PAIR            shift and go to state 19
     LISTOF          shift and go to state 21
     SETOF           shift and go to state 22
     NUMBER          shift and go to state 23
     STRINGPALABRA   shift and go to state 24
+    BOOLEANPALABRA  shift and go to state 25
     VARIABLE        shift and go to state 18
 
     datosprimitivos                shift and go to state 20
@@ -321,35 +331,35 @@ state 17
 
     (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS . LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
     (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS . LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
-    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS . LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF LPAREN RPAREN
+    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS . LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN
     (11) variableConTipo -> valovar VARIABLE DOSPUNTOS . STRING IGUAL STRINGPALABRA
     (12) variableConTipo -> valovar VARIABLE DOSPUNTOS . INT IGUAL NUMBER
     (13) variableConTipo -> valovar VARIABLE DOSPUNTOS . BOOLEAN IGUAL
     (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS . SET MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
     (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS . SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
-    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS . SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN RPAREN
+    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS . SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
 
-    LIST            shift and go to state 25
-    STRING          shift and go to state 27
-    INT             shift and go to state 26
-    BOOLEAN         shift and go to state 28
-    SET             shift and go to state 29
+    LIST            shift and go to state 26
+    STRING          shift and go to state 28
+    INT             shift and go to state 27
+    BOOLEAN         shift and go to state 29
+    SET             shift and go to state 30
 
 
 state 18
 
-    (26) datosprimitivos -> VARIABLE .
+    (27) datosprimitivos -> VARIABLE .
 
-    $end            reduce using rule 26 (datosprimitivos -> VARIABLE .)
-    COMA            reduce using rule 26 (datosprimitivos -> VARIABLE .)
-    RPAREN          reduce using rule 26 (datosprimitivos -> VARIABLE .)
+    $end            reduce using rule 27 (datosprimitivos -> VARIABLE .)
+    COMA            reduce using rule 27 (datosprimitivos -> VARIABLE .)
+    RPAREN          reduce using rule 27 (datosprimitivos -> VARIABLE .)
 
 
 state 19
 
     (23) pair -> valovar VARIABLE IGUAL PAIR . LPAREN datosprimitivos COMA datosprimitivos RPAREN
 
-    LPAREN          shift and go to state 30
+    LPAREN          shift and go to state 31
 
 
 state 20
@@ -363,14 +373,14 @@ state 21
 
     (18) ListaSinTipo -> valovar VARIABLE IGUAL LISTOF . LPAREN repeCualquier RPAREN
 
-    LPAREN          shift and go to state 31
+    LPAREN          shift and go to state 32
 
 
 state 22
 
     (22) ConjuntoSinTipo -> valovar VARIABLE IGUAL SETOF . LPAREN repeCualquier RPAREN
 
-    LPAREN          shift and go to state 32
+    LPAREN          shift and go to state 33
 
 
 state 23
@@ -393,635 +403,732 @@ state 24
 
 state 25
 
-    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST . MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
-    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST . MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
-    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST . MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF LPAREN RPAREN
+    (26) datosprimitivos -> BOOLEANPALABRA .
 
-    MENORQUE        shift and go to state 33
+    $end            reduce using rule 26 (datosprimitivos -> BOOLEANPALABRA .)
+    COMA            reduce using rule 26 (datosprimitivos -> BOOLEANPALABRA .)
+    RPAREN          reduce using rule 26 (datosprimitivos -> BOOLEANPALABRA .)
 
 
 state 26
 
-    (12) variableConTipo -> valovar VARIABLE DOSPUNTOS INT . IGUAL NUMBER
+    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST . MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
+    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST . MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
+    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST . MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN
 
-    IGUAL           shift and go to state 34
+    MENORQUE        shift and go to state 34
 
 
 state 27
 
-    (11) variableConTipo -> valovar VARIABLE DOSPUNTOS STRING . IGUAL STRINGPALABRA
+    (12) variableConTipo -> valovar VARIABLE DOSPUNTOS INT . IGUAL NUMBER
 
     IGUAL           shift and go to state 35
 
 
 state 28
 
-    (13) variableConTipo -> valovar VARIABLE DOSPUNTOS BOOLEAN . IGUAL
+    (11) variableConTipo -> valovar VARIABLE DOSPUNTOS STRING . IGUAL STRINGPALABRA
 
     IGUAL           shift and go to state 36
 
 
 state 29
 
-    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET . MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
-    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET . MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
-    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET . MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN RPAREN
+    (13) variableConTipo -> valovar VARIABLE DOSPUNTOS BOOLEAN . IGUAL
 
-    MENORQUE        shift and go to state 37
+    IGUAL           shift and go to state 37
 
 
 state 30
 
-    (23) pair -> valovar VARIABLE IGUAL PAIR LPAREN . datosprimitivos COMA datosprimitivos RPAREN
-    (24) datosprimitivos -> . NUMBER
-    (25) datosprimitivos -> . STRINGPALABRA
-    (26) datosprimitivos -> . VARIABLE
+    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET . MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
+    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET . MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
+    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET . MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
 
-    NUMBER          shift and go to state 23
-    STRINGPALABRA   shift and go to state 24
-    VARIABLE        shift and go to state 18
+    MENORQUE        shift and go to state 38
 
-    datosprimitivos                shift and go to state 38
 
 state 31
 
-    (18) ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN . repeCualquier RPAREN
-    (37) repeCualquier -> . datosprimitivos
-    (38) repeCualquier -> . datosprimitivos COMA repeCualquier
+    (23) pair -> valovar VARIABLE IGUAL PAIR LPAREN . datosprimitivos COMA datosprimitivos RPAREN
     (24) datosprimitivos -> . NUMBER
     (25) datosprimitivos -> . STRINGPALABRA
-    (26) datosprimitivos -> . VARIABLE
+    (26) datosprimitivos -> . BOOLEANPALABRA
+    (27) datosprimitivos -> . VARIABLE
 
     NUMBER          shift and go to state 23
     STRINGPALABRA   shift and go to state 24
+    BOOLEANPALABRA  shift and go to state 25
     VARIABLE        shift and go to state 18
 
-    repeCualquier                  shift and go to state 39
-    datosprimitivos                shift and go to state 40
+    datosprimitivos                shift and go to state 39
 
 state 32
 
-    (22) ConjuntoSinTipo -> valovar VARIABLE IGUAL SETOF LPAREN . repeCualquier RPAREN
-    (37) repeCualquier -> . datosprimitivos
-    (38) repeCualquier -> . datosprimitivos COMA repeCualquier
+    (18) ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN . repeCualquier RPAREN
+    (42) repeCualquier -> . datosprimitivos
+    (43) repeCualquier -> . datosprimitivos COMA repeCualquier
     (24) datosprimitivos -> . NUMBER
     (25) datosprimitivos -> . STRINGPALABRA
-    (26) datosprimitivos -> . VARIABLE
+    (26) datosprimitivos -> . BOOLEANPALABRA
+    (27) datosprimitivos -> . VARIABLE
 
     NUMBER          shift and go to state 23
     STRINGPALABRA   shift and go to state 24
+    BOOLEANPALABRA  shift and go to state 25
     VARIABLE        shift and go to state 18
 
-    repeCualquier                  shift and go to state 41
-    datosprimitivos                shift and go to state 40
+    repeCualquier                  shift and go to state 40
+    datosprimitivos                shift and go to state 41
 
 state 33
 
-    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE . INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
-    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE . STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
-    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE . BOOLEAN MAYORQUE IGUAL LISTOF LPAREN RPAREN
+    (22) ConjuntoSinTipo -> valovar VARIABLE IGUAL SETOF LPAREN . repeCualquier RPAREN
+    (42) repeCualquier -> . datosprimitivos
+    (43) repeCualquier -> . datosprimitivos COMA repeCualquier
+    (24) datosprimitivos -> . NUMBER
+    (25) datosprimitivos -> . STRINGPALABRA
+    (26) datosprimitivos -> . BOOLEANPALABRA
+    (27) datosprimitivos -> . VARIABLE
 
-    INT             shift and go to state 42
-    STRING          shift and go to state 43
-    BOOLEAN         shift and go to state 44
+    NUMBER          shift and go to state 23
+    STRINGPALABRA   shift and go to state 24
+    BOOLEANPALABRA  shift and go to state 25
+    VARIABLE        shift and go to state 18
 
+    repeCualquier                  shift and go to state 42
+    datosprimitivos                shift and go to state 41
 
 state 34
 
-    (12) variableConTipo -> valovar VARIABLE DOSPUNTOS INT IGUAL . NUMBER
+    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE . INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
+    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE . STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
+    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE . BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN
 
-    NUMBER          shift and go to state 45
+    INT             shift and go to state 43
+    STRING          shift and go to state 44
+    BOOLEAN         shift and go to state 45
 
 
 state 35
 
-    (11) variableConTipo -> valovar VARIABLE DOSPUNTOS STRING IGUAL . STRINGPALABRA
+    (12) variableConTipo -> valovar VARIABLE DOSPUNTOS INT IGUAL . NUMBER
 
-    STRINGPALABRA   shift and go to state 46
+    NUMBER          shift and go to state 46
 
 
 state 36
+
+    (11) variableConTipo -> valovar VARIABLE DOSPUNTOS STRING IGUAL . STRINGPALABRA
+
+    STRINGPALABRA   shift and go to state 47
+
+
+state 37
 
     (13) variableConTipo -> valovar VARIABLE DOSPUNTOS BOOLEAN IGUAL .
 
     $end            reduce using rule 13 (variableConTipo -> valovar VARIABLE DOSPUNTOS BOOLEAN IGUAL .)
 
 
-state 37
+state 38
 
     (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE . INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
     (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE . STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
-    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE . BOOLEAN MAYORQUE IGUAL SETOF LPAREN RPAREN
+    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE . BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
 
-    INT             shift and go to state 47
-    STRING          shift and go to state 48
-    BOOLEAN         shift and go to state 49
-
-
-state 38
-
-    (23) pair -> valovar VARIABLE IGUAL PAIR LPAREN datosprimitivos . COMA datosprimitivos RPAREN
-
-    COMA            shift and go to state 50
+    INT             shift and go to state 48
+    STRING          shift and go to state 49
+    BOOLEAN         shift and go to state 50
 
 
 state 39
 
-    (18) ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier . RPAREN
+    (23) pair -> valovar VARIABLE IGUAL PAIR LPAREN datosprimitivos . COMA datosprimitivos RPAREN
 
-    RPAREN          shift and go to state 51
+    COMA            shift and go to state 51
 
 
 state 40
 
-    (37) repeCualquier -> datosprimitivos .
-    (38) repeCualquier -> datosprimitivos . COMA repeCualquier
+    (18) ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier . RPAREN
 
-    RPAREN          reduce using rule 37 (repeCualquier -> datosprimitivos .)
-    COMA            shift and go to state 52
+    RPAREN          shift and go to state 52
 
 
 state 41
 
-    (22) ConjuntoSinTipo -> valovar VARIABLE IGUAL SETOF LPAREN repeCualquier . RPAREN
+    (42) repeCualquier -> datosprimitivos .
+    (43) repeCualquier -> datosprimitivos . COMA repeCualquier
 
-    RPAREN          shift and go to state 53
+    RPAREN          reduce using rule 42 (repeCualquier -> datosprimitivos .)
+    COMA            shift and go to state 53
 
 
 state 42
 
-    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT . MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
+    (22) ConjuntoSinTipo -> valovar VARIABLE IGUAL SETOF LPAREN repeCualquier . RPAREN
 
-    MAYORQUE        shift and go to state 54
+    RPAREN          shift and go to state 54
 
 
 state 43
 
-    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING . MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
+    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT . MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
 
     MAYORQUE        shift and go to state 55
 
 
 state 44
 
-    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN . MAYORQUE IGUAL LISTOF LPAREN RPAREN
+    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING . MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
 
     MAYORQUE        shift and go to state 56
 
 
 state 45
 
+    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN . MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN
+
+    MAYORQUE        shift and go to state 57
+
+
+state 46
+
     (12) variableConTipo -> valovar VARIABLE DOSPUNTOS INT IGUAL NUMBER .
 
     $end            reduce using rule 12 (variableConTipo -> valovar VARIABLE DOSPUNTOS INT IGUAL NUMBER .)
 
 
-state 46
+state 47
 
     (11) variableConTipo -> valovar VARIABLE DOSPUNTOS STRING IGUAL STRINGPALABRA .
 
     $end            reduce using rule 11 (variableConTipo -> valovar VARIABLE DOSPUNTOS STRING IGUAL STRINGPALABRA .)
 
 
-state 47
-
-    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT . MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
-
-    MAYORQUE        shift and go to state 57
-
-
 state 48
 
-    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING . MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
+    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT . MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
 
     MAYORQUE        shift and go to state 58
 
 
 state 49
 
-    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN . MAYORQUE IGUAL SETOF LPAREN RPAREN
+    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING . MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
 
     MAYORQUE        shift and go to state 59
 
 
 state 50
 
+    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN . MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
+
+    MAYORQUE        shift and go to state 60
+
+
+state 51
+
     (23) pair -> valovar VARIABLE IGUAL PAIR LPAREN datosprimitivos COMA . datosprimitivos RPAREN
     (24) datosprimitivos -> . NUMBER
     (25) datosprimitivos -> . STRINGPALABRA
-    (26) datosprimitivos -> . VARIABLE
+    (26) datosprimitivos -> . BOOLEANPALABRA
+    (27) datosprimitivos -> . VARIABLE
 
     NUMBER          shift and go to state 23
     STRINGPALABRA   shift and go to state 24
+    BOOLEANPALABRA  shift and go to state 25
     VARIABLE        shift and go to state 18
 
-    datosprimitivos                shift and go to state 60
+    datosprimitivos                shift and go to state 61
 
-state 51
+state 52
 
     (18) ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier RPAREN .
 
     $end            reduce using rule 18 (ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier RPAREN .)
 
 
-state 52
+state 53
 
-    (38) repeCualquier -> datosprimitivos COMA . repeCualquier
-    (37) repeCualquier -> . datosprimitivos
-    (38) repeCualquier -> . datosprimitivos COMA repeCualquier
+    (43) repeCualquier -> datosprimitivos COMA . repeCualquier
+    (42) repeCualquier -> . datosprimitivos
+    (43) repeCualquier -> . datosprimitivos COMA repeCualquier
     (24) datosprimitivos -> . NUMBER
     (25) datosprimitivos -> . STRINGPALABRA
-    (26) datosprimitivos -> . VARIABLE
+    (26) datosprimitivos -> . BOOLEANPALABRA
+    (27) datosprimitivos -> . VARIABLE
 
     NUMBER          shift and go to state 23
     STRINGPALABRA   shift and go to state 24
+    BOOLEANPALABRA  shift and go to state 25
     VARIABLE        shift and go to state 18
 
-    datosprimitivos                shift and go to state 40
-    repeCualquier                  shift and go to state 61
+    datosprimitivos                shift and go to state 41
+    repeCualquier                  shift and go to state 62
 
-state 53
+state 54
 
     (22) ConjuntoSinTipo -> valovar VARIABLE IGUAL SETOF LPAREN repeCualquier RPAREN .
 
     $end            reduce using rule 22 (ConjuntoSinTipo -> valovar VARIABLE IGUAL SETOF LPAREN repeCualquier RPAREN .)
 
 
-state 54
-
-    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE . IGUAL LISTOF LPAREN repeInt RPAREN
-
-    IGUAL           shift and go to state 62
-
-
 state 55
 
-    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE . IGUAL LISTOF LPAREN repeString RPAREN
+    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE . IGUAL LISTOF LPAREN repeInt RPAREN
 
     IGUAL           shift and go to state 63
 
 
 state 56
 
-    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE . IGUAL LISTOF LPAREN RPAREN
+    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE . IGUAL LISTOF LPAREN repeString RPAREN
 
     IGUAL           shift and go to state 64
 
 
 state 57
 
-    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE . IGUAL SETOF LPAREN repeInt RPAREN
+    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE . IGUAL LISTOF repeBool LPAREN RPAREN
 
     IGUAL           shift and go to state 65
 
 
 state 58
 
-    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE . IGUAL SETOF LPAREN repeString RPAREN
+    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE . IGUAL SETOF LPAREN repeInt RPAREN
 
     IGUAL           shift and go to state 66
 
 
 state 59
 
-    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE . IGUAL SETOF LPAREN RPAREN
+    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE . IGUAL SETOF LPAREN repeString RPAREN
 
     IGUAL           shift and go to state 67
 
 
 state 60
 
-    (23) pair -> valovar VARIABLE IGUAL PAIR LPAREN datosprimitivos COMA datosprimitivos . RPAREN
+    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE . IGUAL SETOF LPAREN repeBool RPAREN
 
-    RPAREN          shift and go to state 68
+    IGUAL           shift and go to state 68
 
 
 state 61
 
-    (38) repeCualquier -> datosprimitivos COMA repeCualquier .
+    (23) pair -> valovar VARIABLE IGUAL PAIR LPAREN datosprimitivos COMA datosprimitivos . RPAREN
 
-    RPAREN          reduce using rule 38 (repeCualquier -> datosprimitivos COMA repeCualquier .)
+    RPAREN          shift and go to state 69
 
 
 state 62
 
-    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL . LISTOF LPAREN repeInt RPAREN
+    (43) repeCualquier -> datosprimitivos COMA repeCualquier .
 
-    LISTOF          shift and go to state 69
+    RPAREN          reduce using rule 43 (repeCualquier -> datosprimitivos COMA repeCualquier .)
 
 
 state 63
 
-    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL . LISTOF LPAREN repeString RPAREN
+    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL . LISTOF LPAREN repeInt RPAREN
 
     LISTOF          shift and go to state 70
 
 
 state 64
 
-    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL . LISTOF LPAREN RPAREN
+    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL . LISTOF LPAREN repeString RPAREN
 
     LISTOF          shift and go to state 71
 
 
 state 65
 
-    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL . SETOF LPAREN repeInt RPAREN
+    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL . LISTOF repeBool LPAREN RPAREN
 
-    SETOF           shift and go to state 72
+    LISTOF          shift and go to state 72
 
 
 state 66
 
-    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL . SETOF LPAREN repeString RPAREN
+    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL . SETOF LPAREN repeInt RPAREN
 
     SETOF           shift and go to state 73
 
 
 state 67
 
-    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL . SETOF LPAREN RPAREN
+    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL . SETOF LPAREN repeString RPAREN
 
     SETOF           shift and go to state 74
 
 
 state 68
 
+    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL . SETOF LPAREN repeBool RPAREN
+
+    SETOF           shift and go to state 75
+
+
+state 69
+
     (23) pair -> valovar VARIABLE IGUAL PAIR LPAREN datosprimitivos COMA datosprimitivos RPAREN .
 
     $end            reduce using rule 23 (pair -> valovar VARIABLE IGUAL PAIR LPAREN datosprimitivos COMA datosprimitivos RPAREN .)
 
 
-state 69
-
-    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF . LPAREN repeInt RPAREN
-
-    LPAREN          shift and go to state 75
-
-
 state 70
 
-    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF . LPAREN repeString RPAREN
+    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF . LPAREN repeInt RPAREN
 
     LPAREN          shift and go to state 76
 
 
 state 71
 
-    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF . LPAREN RPAREN
+    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF . LPAREN repeString RPAREN
 
     LPAREN          shift and go to state 77
 
 
 state 72
 
-    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF . LPAREN repeInt RPAREN
+    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF . repeBool LPAREN RPAREN
+    (38) repeBool -> . bool
+    (39) repeBool -> . bool COMA repeBool
+    (40) bool -> . BOOLEANPALABRA
+    (41) bool -> . VARIABLE
 
-    LPAREN          shift and go to state 78
+    BOOLEANPALABRA  shift and go to state 81
+    VARIABLE        shift and go to state 78
 
+    repeBool                       shift and go to state 79
+    bool                           shift and go to state 80
 
 state 73
 
-    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF . LPAREN repeString RPAREN
+    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF . LPAREN repeInt RPAREN
 
-    LPAREN          shift and go to state 79
+    LPAREN          shift and go to state 82
 
 
 state 74
 
-    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF . LPAREN RPAREN
+    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF . LPAREN repeString RPAREN
 
-    LPAREN          shift and go to state 80
+    LPAREN          shift and go to state 83
 
 
 state 75
 
-    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN . repeInt RPAREN
-    (29) repeInt -> . valor
-    (30) repeInt -> . valor COMA repeInt
-    (31) valor -> . NUMBER
-    (32) valor -> . VARIABLE
+    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF . LPAREN repeBool RPAREN
 
-    NUMBER          shift and go to state 84
-    VARIABLE        shift and go to state 81
+    LPAREN          shift and go to state 84
 
-    repeInt                        shift and go to state 82
-    valor                          shift and go to state 83
 
 state 76
 
-    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN . repeString RPAREN
-    (33) repeString -> . String
-    (34) repeString -> . String COMA repeString
-    (35) String -> . STRINGPALABRA
-    (36) String -> . VARIABLE
+    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN . repeInt RPAREN
+    (30) repeInt -> . valor
+    (31) repeInt -> . valor COMA repeInt
+    (32) valor -> . NUMBER
+    (33) valor -> . VARIABLE
 
-    STRINGPALABRA   shift and go to state 88
+    NUMBER          shift and go to state 88
     VARIABLE        shift and go to state 85
 
-    repeString                     shift and go to state 86
-    String                         shift and go to state 87
+    repeInt                        shift and go to state 86
+    valor                          shift and go to state 87
 
 state 77
 
-    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF LPAREN . RPAREN
+    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN . repeString RPAREN
+    (34) repeString -> . String
+    (35) repeString -> . String COMA repeString
+    (36) String -> . STRINGPALABRA
+    (37) String -> . VARIABLE
 
-    RPAREN          shift and go to state 89
+    STRINGPALABRA   shift and go to state 92
+    VARIABLE        shift and go to state 89
 
+    repeString                     shift and go to state 90
+    String                         shift and go to state 91
 
 state 78
 
-    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF LPAREN . repeInt RPAREN
-    (29) repeInt -> . valor
-    (30) repeInt -> . valor COMA repeInt
-    (31) valor -> . NUMBER
-    (32) valor -> . VARIABLE
+    (41) bool -> VARIABLE .
 
-    NUMBER          shift and go to state 84
-    VARIABLE        shift and go to state 81
+    COMA            reduce using rule 41 (bool -> VARIABLE .)
+    LPAREN          reduce using rule 41 (bool -> VARIABLE .)
+    RPAREN          reduce using rule 41 (bool -> VARIABLE .)
 
-    repeInt                        shift and go to state 90
-    valor                          shift and go to state 83
 
 state 79
 
-    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN . repeString RPAREN
-    (33) repeString -> . String
-    (34) repeString -> . String COMA repeString
-    (35) String -> . STRINGPALABRA
-    (36) String -> . VARIABLE
+    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool . LPAREN RPAREN
 
-    STRINGPALABRA   shift and go to state 88
-    VARIABLE        shift and go to state 85
+    LPAREN          shift and go to state 93
 
-    repeString                     shift and go to state 91
-    String                         shift and go to state 87
 
 state 80
 
-    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN . RPAREN
+    (38) repeBool -> bool .
+    (39) repeBool -> bool . COMA repeBool
 
-    RPAREN          shift and go to state 92
+    LPAREN          reduce using rule 38 (repeBool -> bool .)
+    RPAREN          reduce using rule 38 (repeBool -> bool .)
+    COMA            shift and go to state 94
 
 
 state 81
 
-    (32) valor -> VARIABLE .
+    (40) bool -> BOOLEANPALABRA .
 
-    COMA            reduce using rule 32 (valor -> VARIABLE .)
-    RPAREN          reduce using rule 32 (valor -> VARIABLE .)
+    COMA            reduce using rule 40 (bool -> BOOLEANPALABRA .)
+    LPAREN          reduce using rule 40 (bool -> BOOLEANPALABRA .)
+    RPAREN          reduce using rule 40 (bool -> BOOLEANPALABRA .)
 
 
 state 82
 
-    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt . RPAREN
+    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF LPAREN . repeInt RPAREN
+    (30) repeInt -> . valor
+    (31) repeInt -> . valor COMA repeInt
+    (32) valor -> . NUMBER
+    (33) valor -> . VARIABLE
 
-    RPAREN          shift and go to state 93
+    NUMBER          shift and go to state 88
+    VARIABLE        shift and go to state 85
 
+    repeInt                        shift and go to state 95
+    valor                          shift and go to state 87
 
 state 83
 
-    (29) repeInt -> valor .
-    (30) repeInt -> valor . COMA repeInt
+    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN . repeString RPAREN
+    (34) repeString -> . String
+    (35) repeString -> . String COMA repeString
+    (36) String -> . STRINGPALABRA
+    (37) String -> . VARIABLE
 
-    RPAREN          reduce using rule 29 (repeInt -> valor .)
-    COMA            shift and go to state 94
+    STRINGPALABRA   shift and go to state 92
+    VARIABLE        shift and go to state 89
 
+    repeString                     shift and go to state 96
+    String                         shift and go to state 91
 
 state 84
 
-    (31) valor -> NUMBER .
+    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN . repeBool RPAREN
+    (38) repeBool -> . bool
+    (39) repeBool -> . bool COMA repeBool
+    (40) bool -> . BOOLEANPALABRA
+    (41) bool -> . VARIABLE
 
-    COMA            reduce using rule 31 (valor -> NUMBER .)
-    RPAREN          reduce using rule 31 (valor -> NUMBER .)
+    BOOLEANPALABRA  shift and go to state 81
+    VARIABLE        shift and go to state 78
 
+    repeBool                       shift and go to state 97
+    bool                           shift and go to state 80
 
 state 85
 
-    (36) String -> VARIABLE .
+    (33) valor -> VARIABLE .
 
-    COMA            reduce using rule 36 (String -> VARIABLE .)
-    RPAREN          reduce using rule 36 (String -> VARIABLE .)
+    COMA            reduce using rule 33 (valor -> VARIABLE .)
+    RPAREN          reduce using rule 33 (valor -> VARIABLE .)
 
 
 state 86
 
-    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString . RPAREN
-
-    RPAREN          shift and go to state 95
-
-
-state 87
-
-    (33) repeString -> String .
-    (34) repeString -> String . COMA repeString
-
-    RPAREN          reduce using rule 33 (repeString -> String .)
-    COMA            shift and go to state 96
-
-
-state 88
-
-    (35) String -> STRINGPALABRA .
-
-    COMA            reduce using rule 35 (String -> STRINGPALABRA .)
-    RPAREN          reduce using rule 35 (String -> STRINGPALABRA .)
-
-
-state 89
-
-    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF LPAREN RPAREN .
-
-    $end            reduce using rule 17 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF LPAREN RPAREN .)
-
-
-state 90
-
-    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt . RPAREN
-
-    RPAREN          shift and go to state 97
-
-
-state 91
-
-    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString . RPAREN
+    (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt . RPAREN
 
     RPAREN          shift and go to state 98
 
 
+state 87
+
+    (30) repeInt -> valor .
+    (31) repeInt -> valor . COMA repeInt
+
+    RPAREN          reduce using rule 30 (repeInt -> valor .)
+    COMA            shift and go to state 99
+
+
+state 88
+
+    (32) valor -> NUMBER .
+
+    COMA            reduce using rule 32 (valor -> NUMBER .)
+    RPAREN          reduce using rule 32 (valor -> NUMBER .)
+
+
+state 89
+
+    (37) String -> VARIABLE .
+
+    COMA            reduce using rule 37 (String -> VARIABLE .)
+    RPAREN          reduce using rule 37 (String -> VARIABLE .)
+
+
+state 90
+
+    (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString . RPAREN
+
+    RPAREN          shift and go to state 100
+
+
+state 91
+
+    (34) repeString -> String .
+    (35) repeString -> String . COMA repeString
+
+    RPAREN          reduce using rule 34 (repeString -> String .)
+    COMA            shift and go to state 101
+
+
 state 92
 
-    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN RPAREN .
+    (36) String -> STRINGPALABRA .
 
-    $end            reduce using rule 21 (ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN RPAREN .)
+    COMA            reduce using rule 36 (String -> STRINGPALABRA .)
+    RPAREN          reduce using rule 36 (String -> STRINGPALABRA .)
 
 
 state 93
+
+    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN . RPAREN
+
+    RPAREN          shift and go to state 102
+
+
+state 94
+
+    (39) repeBool -> bool COMA . repeBool
+    (38) repeBool -> . bool
+    (39) repeBool -> . bool COMA repeBool
+    (40) bool -> . BOOLEANPALABRA
+    (41) bool -> . VARIABLE
+
+    BOOLEANPALABRA  shift and go to state 81
+    VARIABLE        shift and go to state 78
+
+    bool                           shift and go to state 80
+    repeBool                       shift and go to state 103
+
+state 95
+
+    (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt . RPAREN
+
+    RPAREN          shift and go to state 104
+
+
+state 96
+
+    (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString . RPAREN
+
+    RPAREN          shift and go to state 105
+
+
+state 97
+
+    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool . RPAREN
+
+    RPAREN          shift and go to state 106
+
+
+state 98
 
     (15) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN .
 
     $end            reduce using rule 15 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN .)
 
 
-state 94
+state 99
 
-    (30) repeInt -> valor COMA . repeInt
-    (29) repeInt -> . valor
-    (30) repeInt -> . valor COMA repeInt
-    (31) valor -> . NUMBER
-    (32) valor -> . VARIABLE
+    (31) repeInt -> valor COMA . repeInt
+    (30) repeInt -> . valor
+    (31) repeInt -> . valor COMA repeInt
+    (32) valor -> . NUMBER
+    (33) valor -> . VARIABLE
 
-    NUMBER          shift and go to state 84
-    VARIABLE        shift and go to state 81
+    NUMBER          shift and go to state 88
+    VARIABLE        shift and go to state 85
 
-    valor                          shift and go to state 83
-    repeInt                        shift and go to state 99
+    valor                          shift and go to state 87
+    repeInt                        shift and go to state 107
 
-state 95
+state 100
 
     (16) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN .
 
     $end            reduce using rule 16 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN .)
 
 
-state 96
+state 101
 
-    (34) repeString -> String COMA . repeString
-    (33) repeString -> . String
-    (34) repeString -> . String COMA repeString
-    (35) String -> . STRINGPALABRA
-    (36) String -> . VARIABLE
+    (35) repeString -> String COMA . repeString
+    (34) repeString -> . String
+    (35) repeString -> . String COMA repeString
+    (36) String -> . STRINGPALABRA
+    (37) String -> . VARIABLE
 
-    STRINGPALABRA   shift and go to state 88
-    VARIABLE        shift and go to state 85
+    STRINGPALABRA   shift and go to state 92
+    VARIABLE        shift and go to state 89
 
-    String                         shift and go to state 87
-    repeString                     shift and go to state 100
+    String                         shift and go to state 91
+    repeString                     shift and go to state 108
 
-state 97
+state 102
+
+    (17) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN .
+
+    $end            reduce using rule 17 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN .)
+
+
+state 103
+
+    (39) repeBool -> bool COMA repeBool .
+
+    LPAREN          reduce using rule 39 (repeBool -> bool COMA repeBool .)
+    RPAREN          reduce using rule 39 (repeBool -> bool COMA repeBool .)
+
+
+state 104
 
     (19) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN .
 
     $end            reduce using rule 19 (ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN .)
 
 
-state 98
+state 105
 
     (20) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN .
 
     $end            reduce using rule 20 (ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN .)
 
 
-state 99
+state 106
 
-    (30) repeInt -> valor COMA repeInt .
+    (21) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN .
 
-    RPAREN          reduce using rule 30 (repeInt -> valor COMA repeInt .)
+    $end            reduce using rule 21 (ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN .)
 
 
-state 100
+state 107
 
-    (34) repeString -> String COMA repeString .
+    (31) repeInt -> valor COMA repeInt .
 
-    RPAREN          reduce using rule 34 (repeString -> String COMA repeString .)
+    RPAREN          reduce using rule 31 (repeInt -> valor COMA repeInt .)
+
+
+state 108
+
+    (35) repeString -> String COMA repeString .
+
+    RPAREN          reduce using rule 35 (repeString -> String COMA repeString .)
 

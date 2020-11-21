@@ -28,6 +28,7 @@ reserverd ={
 tokens = (
     'NUMBER',
     'STRINGPALABRA',
+    'BOOLEANPALABRA',
     'PLUS',
     'MINUS',
     'TIMES',
@@ -81,6 +82,7 @@ t_LISTOF=r'(listOf)'
 t_PAIR=r'(Pair)'
 t_LIST=r'(List)'
 t_SET=r'(Set)'
+t_BOOLEANPALABRA=r'(True) | (False) '
 
 
 # VARIABLE
