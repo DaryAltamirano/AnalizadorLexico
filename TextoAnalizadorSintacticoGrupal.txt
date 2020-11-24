@@ -1,4 +1,6 @@
 ##EJEMPLOS DARIEN ALTAMIRANO
+val lastName = "Mgbemena"
+val firstName: String = "Chike"
 val primos: List < Int > = listOf (2)
 val nombres: List<String> = listOf("Juan")
 val listaMezclada = listOf("Juan", 1, 's') 
