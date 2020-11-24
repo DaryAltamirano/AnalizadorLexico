@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b5d8274-3b2a-4838-be54-f03dad60de7e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Analizador_Lexico.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Analizador_Lexico.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lexicoProyecto.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicoProyecto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parser.out" beforeDir="false" afterPath="$PROJECT_DIR$/parser.out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parsetab.py" beforeDir="false" afterPath="$PROJECT_DIR$/parsetab.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sintacticoProyecto.py" beforeDir="false" afterPath="$PROJECT_DIR$/sintacticoProyecto.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,24 +52,24 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="png" value="2" />
+          <entry key="png" value="4" />
           <entry key="py" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="2" />
+          <entry key="Image" value="4" />
           <entry key="Python" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="547" />
+          <entry key="py" value="629" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="547" />
+          <entry key="Python" value="629" />
         </counts>
       </usages-collector>
     </session>
@@ -85,22 +79,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lexicoProyecto.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
+            <state relative-caret-position="1565">
+              <caret line="137" column="23" lean-forward="true" selection-start-line="137" selection-start-column="23" selection-end-line="137" selection-end-column="23" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CapturasSintactico/PruebaSintacticaAltamirano.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CapturasSintactico/PruebaSintacticaChonillo.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sintacticoProyecto.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="246" column="26" selection-start-line="246" selection-start-column="26" selection-end-line="246" selection-end-column="26" />
+            <state relative-caret-position="45">
+              <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
               <folding>
                 <element signature="e#16#39#0" expanded="true" />
-                <marker date="1606192999121" expanded="true" signature="6942:7048" ph="..." />
-                <marker date="1606192999121" expanded="true" signature="7309:7312" ph="..." />
-                <marker date="1606192999121" expanded="true" signature="7309:7474" ph="..." />
+                <marker date="1606193505836" expanded="true" signature="6966:7080" ph="..." />
+                <marker date="1606193505836" expanded="true" signature="7347:7438" ph="..." />
+                <marker date="1606193505836" expanded="true" signature="7347:7692" ph="..." />
               </folding>
             </state>
           </provider>
@@ -109,15 +113,6 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/parsetab.py">
           <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TextoAnalizadorLexicoGrupal.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
-            </state>
-          </provider>
         </entry>
       </file>
     </leaf>
@@ -307,10 +302,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CapturasSintactico/PruebaSintacticaChonillo.png">
+    <entry file="file://$PROJECT_DIR$/CapturasSintactico/PruebaSintacticaAltamirano.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/CapturasSintactico/PruebaSintacticaAltamirano.png">
+    <entry file="file://$PROJECT_DIR$/CapturasSintactico/PruebaSintacticaChonillo.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/parsetab.py">
@@ -318,20 +313,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lexicoProyecto.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="77" column="12" selection-start-line="77" selection-start-column="12" selection-end-line="77" selection-end-column="12" />
+        <state relative-caret-position="1565">
+          <caret line="137" column="23" lean-forward="true" selection-start-line="137" selection-start-column="23" selection-end-line="137" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sintacticoProyecto.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="246" column="26" selection-start-line="246" selection-start-column="26" selection-end-line="246" selection-end-column="26" />
+        <state relative-caret-position="45">
+          <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
           <folding>
             <element signature="e#16#39#0" expanded="true" />
-            <marker date="1606192999121" expanded="true" signature="6942:7048" ph="..." />
-            <marker date="1606192999121" expanded="true" signature="7309:7312" ph="..." />
-            <marker date="1606192999121" expanded="true" signature="7309:7474" ph="..." />
+            <marker date="1606193505836" expanded="true" signature="6966:7080" ph="..." />
+            <marker date="1606193505836" expanded="true" signature="7347:7438" ph="..." />
+            <marker date="1606193505836" expanded="true" signature="7347:7692" ph="..." />
           </folding>
         </state>
       </provider>

@@ -227,11 +227,11 @@ def p_funcionSinSalidaArg(p):
 def p_adicionales(p):
     '''adicionales: size
                   | rindex
-                  |
+                  | sublist
                   | contains'''
 
 def p_size(p):
-    '''size: lista SIZE'''
+    '''size: lista PUNTO SIZE'''
 def p_contains(p):
     '''contains: valor IN lista
                 | valor IN conjunto
