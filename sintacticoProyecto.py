@@ -17,7 +17,9 @@ def p_todo(p):
                | conjunto 
                | pair
                | control
-               | funcion '''
+               | adicionales
+               | funcion
+               | sublist'''
 
 ##Listas listo
 def p_Todaslaslistas(p):
@@ -221,6 +223,35 @@ def p_funcionConSalidaArg(p):
 def p_funcionSinSalidaArg(p):
     'funSinSalidaArg : FUN VARIABLE LPAREN RPAREN LLLAVE RLLAVE'
 
+#############################
+def p_adicionales(p):
+    '''adicionales: size
+                  | rindex
+                  |
+                  | contains'''
+
+def p_size(p):
+    '''size: lista SIZE'''
+def p_contains(p):
+    '''contains: valor IN lista
+                | valor IN conjunto
+                | valor IN variable'''
+def p_lastindexof(p):
+    '''rindex: STRING RINDEX LPAREN STRING RPAREN'''
+
+def p_sublist(p):
+    '''sublist: sublistIndex
+              |sublistInicio
+              |sublistFinal'''
+
+def p_sublistIndex(p):
+    'sublistIndex: lista LCLASP INT DOSPUNTOS INT RCLASP'
+
+def p_sublistDefectoInicio(p):
+    'sublistInicio: lista LCLASP DOSPUNTOS INT RCLASP'
+
+def p_sublistDefectoFinal(p):
+    'sublistFinal: lista LCLASP INT DOSPUNTOS RCLASP'
 
 def p_error(p):
     print("Syntax error in input!")

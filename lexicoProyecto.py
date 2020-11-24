@@ -27,6 +27,7 @@ reserverd ={
     'or' :'OR',
     'and':'AND',
     'in' : 'IN',
+    'rindex': 'RINDEX',
     }
 tokens = (
     'NUMBER',
@@ -51,6 +52,8 @@ tokens = (
     'COMA',
     'PUNTO',
     'DIFERENTE',
+    'LCLASP',
+    'RCLASP'
  ) + tuple(reserverd.values())
 # Regular expression rules for simple tokens
 t_PLUS = r'\+'
@@ -71,6 +74,8 @@ t_COMA=r','
 t_DIFERENTE=r'!='
 t_LLLAVE=r'{'
 t_RLLAVE=r'}'
+t_LCLASP=r'['
+t_RCLASP=r']'
 
 # RESERVADOS
 t_INT=r'(Int) | (int) | (INT)'
@@ -87,6 +92,7 @@ t_STRING=r'(String)'
 t_BOOLEAN=r'(Boolean)'
 t_FUN=r'(fun)'
 t_SIZE=r'(size\(\))'
+t_RINDEX=r'(rindex)'
 t_WHILE=r'(while)'
 t_SETOF=r'(setOf)'
 t_LISTOF=r'(listOf)'
