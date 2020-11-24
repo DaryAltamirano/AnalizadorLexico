@@ -9,6 +9,7 @@ reserverd ={
     'else' :'ELSE',
     'while' :'WHILE',
     'for' : 'FOR',
+    'when' : 'WHEN',
     'var':'VAR',
     'val':'VAL',
     'int':'INT',
@@ -77,6 +78,7 @@ t_ELSE =r'(else)'
 t_IF=r'(if)'
 t_THEN=r'(then)'
 t_FOR = r'(for)'
+t_WHEN = r'(when)'
 t_AND=r'(and)'
 t_OR= r'(or)'
 t_VAR=r'(var)'

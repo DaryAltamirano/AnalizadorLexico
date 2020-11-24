@@ -16,7 +16,8 @@ def p_todo(p):
                | variable 
                | conjunto 
                | pair
-               | control '''
+               | control
+               | funcion '''
 
 ##Listas listo
 def p_Todaslaslistas(p):
@@ -146,11 +147,29 @@ def p_operadoresComp(p):
                         | MENORQUE
                         | ESIGUAL'''
 
+#Tipo de dato
+def p_tipoDato(P):
+    '''tipoDato : INT
+                | STRING
+                | BOOLEAN'''
+
+#Argumento
+def p_Argumento(P):
+    'argumento : tipoDato VARIABLE'
+
+
+def p_repetirArgumento(p):
+    'repeArg : argumento'
+
+
+def p_repetirArgumento_B(p):
+    'repeArg : argumento COMA repeArg'
 
 ###############################################################
 #Gustavo Chonillo Vera
 def p_control(p):
     '''control : if
+              | when
               | for'''
 
 def p_if(p):
@@ -158,10 +177,9 @@ def p_if(p):
             | ifComparacion
             | ifVariable'''
 
-#def p_when(p):
-#    '''when : whenBoolean
-#            | whenComparacion
-#            | whenVariable'''
+def p_when(p):
+   '''when : whenVacio
+           | whenVariable'''
 
 def p_for(p):
     '''for : forRango
@@ -176,13 +194,32 @@ def p_ifVariable(p):
     'ifVariable : IF LPAREN VARIABLE RPAREN LLLAVE RLLAVE'
 
 ###############################################################
-#def p_when(p):
+def p_whenVariable(p):
+    'whenVariable : WHEN LPAREN VARIABLE RPAREN LLLAVE RLLAVE'
+def p_whenVacio(p):
+    'whenVacio : WHEN LLLAVE RLLAVE'
 
 ###############################################################
 def p_forVariable(p):
     'forVariable : FOR LPAREN VARIABLE IN VARIABLE RPAREN LLLAVE RLLAVE'
 def p_forRango(p):
     'forRango : FOR LPAREN VARIABLE IN NUMBER PUNTO PUNTO NUMBER RPAREN LLLAVE RLLAVE'
+
+################################################################
+
+def p_funcion(p):
+    ''' funcion : funConSalidaArg
+                | funConSalida
+                | funSinSalidaArg
+                | funSinSalida'''
+def p_funcionConSalida(p):
+    'funConSalida : FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE RLLAVE'
+def p_funcionSinSalida(p):
+    'funSinSalida : FUN VARIABLE LPAREN repeArg RPAREN LLLAVE RLLAVE'
+def p_funcionConSalidaArg(p):
+    'funConSalidaArg : FUN VARIABLE LPAREN RPAREN DOSPUNTOS tipoDato LLLAVE RLLAVE'
+def p_funcionSinSalidaArg(p):
+    'funSinSalidaArg : FUN VARIABLE LPAREN RPAREN LLLAVE RLLAVE'
 
 
 def p_error(p):
