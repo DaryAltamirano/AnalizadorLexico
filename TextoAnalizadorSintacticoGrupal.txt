@@ -7,3 +7,17 @@ val listaMezclada = listOf("Juan", 1, 's')
 val conjunto: Set<Int> = setOf(1, 3, 4)
 val conjuntoMezclado = setOf(2, 4, "casa", 'c')  
 var pair = Pair("Kotlin Pair",2)
+##EJEMPLOS GUSTAVO CHONILLO
+for(a in 1..5){}
+for(a in lista){}
+if(a == 0){}
+if(a < 0){}
+if(a != 0){}
+if(a){}
+if(True){}
+when(hola){}
+when{}
+fun hola(String f){}
+fun hola(int n, Boolean p):int{}
+fun hola(){}
+fun hola():String{}
