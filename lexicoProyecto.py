@@ -8,6 +8,7 @@ reserverd ={
     'then': 'THEN',
     'else' :'ELSE',
     'while' :'WHILE',
+    'for' : 'FOR',
     'var':'VAR',
     'val':'VAL',
     'int':'INT',
@@ -24,6 +25,7 @@ reserverd ={
     'pair':'PAIR',
     'or' :'OR',
     'and':'AND',
+    'in' : 'IN',
     }
 tokens = (
     'NUMBER',
@@ -35,6 +37,8 @@ tokens = (
     'DIVIDE',
     'LPAREN',
     'RPAREN',
+    'LLLAVE',
+    'RLLAVE',
     'MAYORQUE',
     'MENORQUE',
     'VARIABLE',
@@ -44,6 +48,7 @@ tokens = (
     'DOSPUNTOS',
     'ESIGUAL',
     'COMA',
+    'PUNTO',
     'DIFERENTE',
  ) + tuple(reserverd.values())
 # Regular expression rules for simple tokens
@@ -57,17 +62,21 @@ t_MAYORQUE =  r'>'
 t_MENORQUE =  r'<'
 t_MOD = r'%'
 t_IGUAL= r'='
+t_PUNTO=r'\.'
 t_PUNTOYCOMA=r';'
 t_DOSPUNTOS=r':'
 t_ESIGUAL=r'=='
 t_COMA=r','
 t_DIFERENTE=r'!='
+t_LLLAVE=r'{'
+t_RLLAVE=r'}'
 
 # RESERVADOS
 t_INT=r'(Int) | (int) | (INT)'
 t_ELSE =r'(else)'
 t_IF=r'(if)'
 t_THEN=r'(then)'
+t_FOR = r'(for)'
 t_AND=r'(and)'
 t_OR= r'(or)'
 t_VAR=r'(var)'
@@ -83,6 +92,7 @@ t_PAIR=r'(Pair)'
 t_LIST=r'(List)'
 t_SET=r'(Set)'
 t_BOOLEANPALABRA=r'(True) | (False) '
+t_IN = r'(in)'
 
 
 # VARIABLE

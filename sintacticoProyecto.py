@@ -8,8 +8,6 @@ from lexicoProyecto import tokens
 from lexicoProyecto import reserverd
 
 
-
-
 ##################################################
 # EMPIEZA AQUÍ DARIEN ALTAMIRANO
 
@@ -17,7 +15,8 @@ def p_todo(p):
      '''todo : lista 
                | variable 
                | conjunto 
-               | pair'''
+               | pair
+               | control '''
 
 ##Listas listo
 def p_Todaslaslistas(p):
@@ -137,8 +136,53 @@ def p_repetirCualquiera(p):
 def p_repetirCualquiera_i(p):
      'repeCualquier : datosprimitivos COMA repeCualquier'
 
+# PARA COMPARAR VARIABLES Y NUMEROS
+def p_comparacion(p):
+    'comparacion : valor operadoresComp valor'
+
+def p_operadoresComp(p):
+    '''operadoresComp : MAYORQUE
+                        | DIFERENTE
+                        | MENORQUE
+                        | ESIGUAL'''
 
 
+###############################################################
+#Gustavo Chonillo Vera
+def p_control(p):
+    '''control : if
+              | for'''
+
+def p_if(p):
+    '''if : ifBoolean
+            | ifComparacion
+            | ifVariable'''
+
+#def p_when(p):
+#    '''when : whenBoolean
+#            | whenComparacion
+#            | whenVariable'''
+
+def p_for(p):
+    '''for : forRango
+           | forVariable'''
+
+###############################################################
+def p_ifBoolean(p):
+    'ifBoolean : IF LPAREN BOOLEANPALABRA RPAREN LLLAVE RLLAVE'
+def p_ifComparacion(p):
+    'ifComparacion : IF LPAREN comparacion RPAREN LLLAVE RLLAVE'
+def p_ifVariable(p):
+    'ifVariable : IF LPAREN VARIABLE RPAREN LLLAVE RLLAVE'
+
+###############################################################
+#def p_when(p):
+
+###############################################################
+def p_forVariable(p):
+    'forVariable : FOR LPAREN VARIABLE IN VARIABLE RPAREN LLLAVE RLLAVE'
+def p_forRango(p):
+    'forRango : FOR LPAREN VARIABLE IN NUMBER PUNTO PUNTO NUMBER RPAREN LLLAVE RLLAVE'
 
 
 def p_error(p):
