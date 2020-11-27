@@ -7,6 +7,7 @@ import ply.yacc as yacc
 from lexicoProyecto import tokens
 from lexicoProyecto import reserverd
 
+textoSalida = "" #Texto en el que se escribe la salida
 
 ##################################################
 # EMPIEZA AQUÍ DARIEN ALTAMIRANO
@@ -225,45 +226,45 @@ def p_funcionSinSalidaArg(p):
 
 #############################
 def p_adicionales(p):
-    '''adicionales: size
+    '''adicionales : size
                   | rindex
                   | sublist
                   | contains'''
 
 def p_size(p):
-    '''size: lista PUNTO SIZE'''
+    '''size : lista PUNTO SIZE'''
 def p_contains(p):
-    '''contains: valor IN lista
+    '''contains : valor IN lista
                 | valor IN conjunto
                 | valor IN variable'''
 def p_lastindexof(p):
-    '''rindex: STRING RINDEX LPAREN STRING RPAREN'''
+    '''rindex : STRING RINDEX LPAREN STRING RPAREN'''
 
 def p_sublist(p):
-    '''sublist: sublistIndex
-              |sublistInicio
-              |sublistFinal'''
+    '''sublist : sublistIndex
+              | sublistInicio
+              | sublistFinal'''
 
 def p_sublistIndex(p):
-    'sublistIndex: lista LCLASP INT DOSPUNTOS INT RCLASP'
+    'sublistIndex : lista LCLASP INT DOSPUNTOS INT RCLASP'
 
 def p_sublistDefectoInicio(p):
-    'sublistInicio: lista LCLASP DOSPUNTOS INT RCLASP'
+    'sublistInicio : lista LCLASP DOSPUNTOS INT RCLASP'
 
 def p_sublistDefectoFinal(p):
-    'sublistFinal: lista LCLASP INT DOSPUNTOS RCLASP'
+    'sublistFinal : lista LCLASP INT DOSPUNTOS RCLASP'
 
 def p_error(p):
-    print("Syntax error in input!")
+    global textoSalida
+    textoSalida+="Syntax error in input!\n"
 
  # Build the parser
 parser = yacc.yacc()
 
-while True:
-    try:
-        s = input('calc > ')
-    except EOFError:
-        break
-    if not s: continue
-    result = parser.parse(s)
-    print(result)
+def analizarSin(data):
+    global textoSalida
+    textoSalida = ""
+    
+    result = parser.parse(data)
+    textoSalida+=str(result)+"\n"
+    return textoSalida

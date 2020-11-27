@@ -1,13 +1,17 @@
 from tkinter import *
-
+from lexicoProyecto import analizarLex
+from sintacticoProyecto import analizarSin
 
 
 ###METODOS DE APOYO
 
-def getTextInput():
-     texto= TextoCodigo.get(1.0,END)   
-     LabelResultado["text"]=texto
+def getTextInputLex():
+     texto= TextoCodigo.get(1.0,END)
+     LabelResultado["text"]= analizarLex(texto)
 
+def getTextInputSin():
+     texto = TextoCodigo.get(1.0, END)
+     LabelResultado["text"] = analizarSin(texto)
 
 ####INICIO DE LA INTERFAZ
 raiz =Tk()
@@ -26,8 +30,8 @@ TextoCodigo.place(x=325, y=200, anchor="center")
 LabelResultado=Label(miFrame, text="Aqui ira el resultado del analisis", fg="red", bg="lightblue",font=("Arial Novas", 18))
 LabelResultado.place(x=325, y=500, anchor="center")
 # BOTONES
-botonLexico = Button(miFrame, text="Analizador Lexico",command=getTextInput).place(x=150, y=600)
-botonSintactico = Button(miFrame, text="Analizador Sintactico",command=getTextInput).place(x=400, y=600)
+botonLexico = Button(miFrame, text="Analizador Lexico",command=getTextInputLex).place(x=150, y=600)
+botonSintactico = Button(miFrame, text="Analizador Sintactico",command=getTextInputSin).place(x=400, y=600)
 
 
 raiz.mainloop()

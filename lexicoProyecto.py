@@ -2,6 +2,7 @@ import ply.lex as lex
 
 # KOTLIN!!!!
 # List of token names.   This is always required
+textoSalida = "" #Texto en el que se escribe la salida
 
 reserverd ={
     'if ':'IF',
@@ -74,7 +75,7 @@ t_COMA=r','
 t_DIFERENTE=r'!='
 t_LLLAVE=r'{'
 t_RLLAVE=r'}'
-t_LCLASP=r'['
+t_LCLASP=r'\['
 t_RCLASP=r']'
 
 # RESERVADOS
@@ -123,7 +124,8 @@ t_ignore = ' \t'
 
 # Error handling rule
 def t_error(t):
-    print("No es reconocido '%s'" % t.value[0])
+    global textoSalida
+    textoSalida +="No es reconocido '%s'" % t.value[0]+"\n"
     t.lexer.skip(1)
 
 def t_STRINGPALABRA(t):
@@ -137,18 +139,20 @@ lexer = lex.lex()
 # archivo=open("C:/Users/LAPTOP/Documents/GitHub/AnalizadorLexico/a.txt")
 # data = archivo.read()
 
-# #data ='''setof() tuple() listof() size()'''
+# #data ='''setOf() tuple() listOf() size()'''
 # # var count: Int = 10
 # # Give the lexer some input
 # #lexer.input(data)
 # # Tokenize
 
-# def analizar (data):
-#     lexer.input(data)
-#     while True:
-#         tok=lexer.token()
-#         if not tok:
-#             break
-#         print (tok)
 
-# analizar(data)
+def analizarLex (data):
+    lexer.input(data)
+    global textoSalida
+    textoSalida=""
+    while True:
+        tok=lexer.token()
+        if not tok:
+            break
+        textoSalida+= str(tok)+"\n"
+    return textoSalida
