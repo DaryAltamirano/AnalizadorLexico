@@ -108,4 +108,5 @@ _lr_productions = [
   ('funSinSalida -> FUN VARIABLE LPAREN repeArg RPAREN LLLAVE RLLAVE','funSinSalida',7,'p_funcionSinSalida','sintacticoProyecto.py',218),
   ('funConSalidaArg -> FUN VARIABLE LPAREN RPAREN DOSPUNTOS tipoDato LLLAVE RLLAVE','funConSalidaArg',8,'p_funcionConSalidaArg','sintacticoProyecto.py',220),
   ('funSinSalidaArg -> FUN VARIABLE LPAREN RPAREN LLLAVE RLLAVE','funSinSalidaArg',6,'p_funcionSinSalidaArg','sintacticoProyecto.py',222),
+  ('size -> lista PUNTO SIZE,234')
 ]
