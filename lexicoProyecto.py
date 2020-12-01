@@ -29,6 +29,7 @@ reserverd ={
     'and':'AND',
     'in' : 'IN',
     'rindex': 'RINDEX',
+    'contains':'CONTAINS'
     }
 tokens = (
     'NUMBER',
@@ -94,6 +95,7 @@ t_BOOLEAN=r'(Boolean)'
 t_FUN=r'(fun)'
 t_SIZE=r'(size\(\))'
 t_RINDEX=r'(rindex)'
+t_CONTAINS=r'(contains)'
 t_WHILE=r'(while)'
 t_SETOF=r'(setOf)'
 t_LISTOF=r'(listOf)'

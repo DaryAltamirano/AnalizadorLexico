@@ -17,10 +17,8 @@ def p_todo(p):
                | variable 
                | conjunto 
                | pair
-               | control
-               | adicionales
                | funcion
-               | sublist'''
+               | adicionales'''
 
 ##Listas listo
 def p_Todaslaslistas(p):
@@ -225,6 +223,7 @@ def p_funcionSinSalidaArg(p):
     'funSinSalidaArg : FUN VARIABLE LPAREN RPAREN LLLAVE RLLAVE'
 
 #############################
+
 def p_adicionales(p):
     '''adicionales : size
                   | rindex
@@ -232,13 +231,14 @@ def p_adicionales(p):
                   | contains'''
 
 def p_size(p):
-    '''size : lista PUNTO SIZE'''
+    '''size : variable PUNTO SIZE'''
 def p_contains(p):
-    '''contains : valor IN lista
-                | valor IN conjunto
-                | valor IN variable'''
+    '''contains : valor PUNTO CONTAINS LPAREN valor RPAREN
+                | variable PUNTO CONTAINS LPAREN variable RPAREN
+                | variable PUNTO CONTAINS LPAREN valor RPAREN
+                | valor PUNTO CONTAINS LPAREN variable RPAREN'''
 def p_lastindexof(p):
-    '''rindex : STRING RINDEX LPAREN STRING RPAREN'''
+    '''rindex : RINDEX LPAREN STRING COMA STRING RPAREN'''
 
 def p_sublist(p):
     '''sublist : sublistIndex
@@ -261,6 +261,9 @@ def p_error(p):
  # Build the parser
 parser = yacc.yacc()
 
+#archivo=open(r"C:\Users\nbarc\Documents\GitHub\AnalizadorLexico\pruebaAnthony.txt")
+#data = archivo.read()
+
 def analizarSin(data):
     global textoSalida
     textoSalida = ""
@@ -268,3 +271,5 @@ def analizarSin(data):
     result = parser.parse(data)
     textoSalida+=str(result)+"\n"
     return textoSalida
+
+
