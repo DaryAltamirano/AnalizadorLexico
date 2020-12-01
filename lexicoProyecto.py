@@ -29,7 +29,7 @@ reserverd ={
     'and':'AND',
     'in' : 'IN',
     'rindex': 'RINDEX',
-    'contains':'CONTAINS'
+    'contains':'CONTAINS',
     }
 tokens = (
     'NUMBER',
@@ -78,6 +78,7 @@ t_LLLAVE=r'{'
 t_RLLAVE=r'}'
 t_LCLASP=r'\['
 t_RCLASP=r'\]'
+
 
 # RESERVADOS
 t_INT=r'(Int) | (int) | (INT)'
@@ -146,6 +147,7 @@ lexer = lex.lex()
 # # Give the lexer some input
 # #lexer.input(data)
 # # Tokenize
+
 
 def analizarLex (data):
     lexer.input(data)

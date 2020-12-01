@@ -1,7 +1,0 @@
-primos.size()
-nombres.size()
-rindex("string","str")
-"m".contains("ma")
-str.contains("ma")
-"m".contains(str)
-str.contains(str2)

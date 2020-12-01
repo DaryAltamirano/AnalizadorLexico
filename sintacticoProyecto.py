@@ -17,8 +17,10 @@ def p_todo(p):
                | variable 
                | conjunto 
                | pair
+               | control
+               | adicionales
                | funcion
-               | adicionales'''
+               | sublist'''
 
 ##Listas listo
 def p_Todaslaslistas(p):
@@ -108,7 +110,7 @@ def p_repetirInt_i(p):
      'repeInt : valor COMA repeInt'
 def p_valor(p):
      '''valor : NUMBER
-        | VARIABLE'''
+        | VARIABLE '''
 
 # PARA QUE SE REPITA STRING
 # ("hola","oli", "olas")
@@ -223,7 +225,6 @@ def p_funcionSinSalidaArg(p):
     'funSinSalidaArg : FUN VARIABLE LPAREN RPAREN LLLAVE RLLAVE'
 
 #############################
-
 def p_adicionales(p):
     '''adicionales : size
                   | rindex
@@ -231,14 +232,16 @@ def p_adicionales(p):
                   | contains'''
 
 def p_size(p):
-    '''size : variable PUNTO SIZE'''
+    '''size : VARIABLE PUNTO SIZE'''
 def p_contains(p):
-    '''contains : valor PUNTO CONTAINS LPAREN valor RPAREN
-                | variable PUNTO CONTAINS LPAREN variable RPAREN
-                | variable PUNTO CONTAINS LPAREN valor RPAREN
-                | valor PUNTO CONTAINS LPAREN variable RPAREN'''
+    '''contains : 
+                | VARIABLE PUNTO CONTAINS LPAREN datosprimitivos RPAREN
+                | STRINGPALABRA PUNTO CONTAINS LPAREN  STRINGPALABRA RPAREN 
+                | STRINGPALABRA PUNTO CONTAINS LPAREN  VARIABLE RPAREN 
+                '''
+
 def p_lastindexof(p):
-    '''rindex : RINDEX LPAREN STRING COMA STRING RPAREN'''
+    '''rindex : RINDEX LPAREN repeCualquier RPAREN'''
 
 def p_sublist(p):
     '''sublist : sublistIndex
@@ -261,9 +264,6 @@ def p_error(p):
  # Build the parser
 parser = yacc.yacc()
 
-#archivo=open(r"C:\Users\nbarc\Documents\GitHub\AnalizadorLexico\pruebaAnthony.txt")
-#data = archivo.read()
-
 def analizarSin(data):
     global textoSalida
     textoSalida = ""
@@ -271,5 +271,3 @@ def analizarSin(data):
     result = parser.parse(data)
     textoSalida+=str(result)+"\n"
     return textoSalida
-
-
