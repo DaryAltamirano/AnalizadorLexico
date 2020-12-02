@@ -12,16 +12,39 @@ textoSalida = "" #Texto en el que se escribe la salida
 ##################################################
 # EMPIEZA AQUÍ DARIEN ALTAMIRANO
 
+
+#def p_repetirCualquiera_i(p):
+#     'repeCualquier : datosprimitivos COMA repeCualquier'
+
+def p_t(p):
+    '''todoConLinea : repetodo '''
+
 def p_todo(p):
-     '''todo : lista 
+     '''todo :  lista 
                | variable 
                | conjunto 
-               | pair
+               | pair  
                | control
                | adicionales
                | funcion
-               | sublist'''
+               | sublist
+               | readline
+               | prin
+               | contador
+               | retor'''
 
+def p_repeTodoA(p):
+     '''repetodo : todo'''
+def p_repeTodo(p):
+     'repetodo : todo repetodo'
+
+# def p_repetirInt(p):
+#      'repeInt : valor'
+# def p_repetirInt_i(p):
+#      'repeInt : valor COMA repeInt'
+# def p_valor(p):
+#      '''valor : NUMBER
+#         | VARIABLE '''
 ##Listas listo
 def p_Todaslaslistas(p):
      '''lista :  ListaConTipo 
@@ -89,8 +112,6 @@ def p_Pair(p):
 
 
 # REGLAS QUE TE PUEDEN SERVIR 
-
-
 # A ESTA REGLA LE FALTA EL BOOL
 def p_algunTipo(p):
      '''datosprimitivos : NUMBER 
@@ -131,7 +152,6 @@ def p_repetirBool_B(p):
 def p_Bool(p):
      '''bool : BOOLEANPALABRA
         | VARIABLE'''
-
 
 # PARA QUE SE REPITA CUALQUIERDATOPRIMITIVO
 # (2,true,"asda",variab)
@@ -190,23 +210,23 @@ def p_for(p):
 
 ###############################################################
 def p_ifBoolean(p):
-    'ifBoolean : IF LPAREN BOOLEANPALABRA RPAREN LLLAVE RLLAVE'
+    'ifBoolean : IF LPAREN BOOLEANPALABRA RPAREN LLLAVE  repetodo RLLAVE'
 def p_ifComparacion(p):
-    'ifComparacion : IF LPAREN comparacion RPAREN LLLAVE RLLAVE'
+    'ifComparacion : IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE'
 def p_ifVariable(p):
-    'ifVariable : IF LPAREN VARIABLE RPAREN LLLAVE RLLAVE'
+    'ifVariable : IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE'
 
 ###############################################################
 def p_whenVariable(p):
-    'whenVariable : WHEN LPAREN VARIABLE RPAREN LLLAVE RLLAVE'
+    'whenVariable : WHEN LPAREN VARIABLE RPAREN LLLAVE  repetodo RLLAVE'
 def p_whenVacio(p):
-    'whenVacio : WHEN LLLAVE RLLAVE'
+    'whenVacio : WHEN LLLAVE repetodo RLLAVE'
 
 ###############################################################
 def p_forVariable(p):
-    'forVariable : FOR LPAREN VARIABLE IN VARIABLE RPAREN LLLAVE RLLAVE'
+    'forVariable : FOR LPAREN VARIABLE IN VARIABLE RPAREN LLLAVE repetodo RLLAVE'
 def p_forRango(p):
-    'forRango : FOR LPAREN VARIABLE IN NUMBER PUNTO PUNTO NUMBER RPAREN LLLAVE RLLAVE'
+    'forRango : FOR LPAREN VARIABLE IN NUMBER PUNTO PUNTO NUMBER RPAREN LLLAVE repetodo RLLAVE'
 
 ################################################################
 
@@ -216,13 +236,13 @@ def p_funcion(p):
                 | funSinSalidaArg
                 | funSinSalida'''
 def p_funcionConSalida(p):
-    'funConSalida : FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE RLLAVE'
+    'funConSalida : FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE'
 def p_funcionSinSalida(p):
-    'funSinSalida : FUN VARIABLE LPAREN repeArg RPAREN LLLAVE RLLAVE'
+    'funSinSalida : FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE'
 def p_funcionConSalidaArg(p):
-    'funConSalidaArg : FUN VARIABLE LPAREN RPAREN DOSPUNTOS tipoDato LLLAVE RLLAVE'
+    'funConSalidaArg : FUN VARIABLE LPAREN RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE'
 def p_funcionSinSalidaArg(p):
-    'funSinSalidaArg : FUN VARIABLE LPAREN RPAREN LLLAVE RLLAVE'
+    'funSinSalidaArg : FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE'
 
 #############################
 def p_adicionales(p):
@@ -241,7 +261,11 @@ def p_contains(p):
                 '''
 
 def p_lastindexof(p):
-    '''rindex : RINDEX LPAREN repeCualquier RPAREN'''
+    '''rindex : STRINGPALABRA PUNTO RINDEX LPAREN repeCualquier RPAREN
+                | VARIABLE PUNTO RINDEX LPAREN repeCualquier RPAREN'''
+
+
+
 
 def p_sublist(p):
     '''sublist : sublistIndex
@@ -257,17 +281,35 @@ def p_sublistDefectoInicio(p):
 def p_sublistDefectoFinal(p):
     'sublistFinal : lista LCLASP INT DOSPUNTOS RCLASP'
 
+
+def p_readlin(p):
+    '''readline : VARIABLE IGUAL READLINE
+                | valovar VARIABLE IGUAL READLINE'''
+
+def p_printoln(p):
+    '''prin : PRINT LPAREN datosprimitivos RPAREN
+            | PRINTLN LPAREN datosprimitivos RPAREN
+            '''
+
+
+def p_contador(p):
+    '''contador : VARIABLE PLUS PLUS '''
+
+def p_return(p):
+    ''' retor : RETURN VARIABLE'''
+
+
+
 def p_error(p):
     global textoSalida
-    textoSalida+="Syntax error in input!\n"
-
- # Build the parser
+    print(p)
+    textoSalida+="Regla no reconocida \n" + str(p)
+# Build the parser
 parser = yacc.yacc()
 
 def analizarSin(data):
-    global textoSalida
+    global textoSalida  
     textoSalida = ""
-    
     result = parser.parse(data)
     textoSalida+=str(result)+"\n"
     return textoSalida

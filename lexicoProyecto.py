@@ -30,6 +30,10 @@ reserverd ={
     'in' : 'IN',
     'rindex': 'RINDEX',
     'contains':'CONTAINS',
+    'readline':'READLINE',
+    'print':'PRINT',
+    'println':'PRINTLN',
+    'return':'RETURN',
     }
 tokens = (
     'NUMBER',
@@ -55,9 +59,11 @@ tokens = (
     'PUNTO',
     'DIFERENTE',
     'LCLASP',
-    'RCLASP'
+    'RCLASP',
+    'SALTOLINEA'
  ) + tuple(reserverd.values())
 # Regular expression rules for simple tokens
+t_SALTOLINEA=r'(\\n)'
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
@@ -81,6 +87,10 @@ t_RCLASP=r'\]'
 
 
 # RESERVADOS
+t_RETURN=r'(return)'
+t_PRINT=r'(print)'
+t_PRINTLN=r'(println)'
+t_READLINE=r'(readLine\(\))'
 t_INT=r'(Int) | (int) | (INT)'
 t_ELSE =r'(else)'
 t_IF=r'(if)'

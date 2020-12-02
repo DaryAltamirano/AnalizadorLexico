@@ -27,7 +27,7 @@ Label(miFrame, text="Ingrese algo para el analisis", fg="red", bg="lightblue",fo
 # TEXTAREA
 TextoCodigo = Text(miFrame, width=70, height=15, padx=10, pady=10)
 TextoCodigo.place(x=325, y=200, anchor="center")
-LabelResultado=Label(miFrame, text="Aqui ira el resultado del analisis", fg="red", bg="lightblue",font=("Arial Novas", 18))
+LabelResultado=Label(miFrame, text="Aqui ira el resultado del analisis", fg="red", bg="lightblue",font=("Arial Novas", 12))
 LabelResultado.place(x=325, y=500, anchor="center")
 
 
