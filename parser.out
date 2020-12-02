@@ -1,18 +1,18 @@
-Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    MINUS
-    TIMES
+    AND
     DIVIDE
+    ELSE
+    MINUS
     MOD
+    OR
     PUNTOYCOMA
     SALTOLINEA
     THEN
-    ELSE
+    TIMES
     WHILE
-    OR
-    AND
 
 Grammar
 
@@ -121,9 +121,9 @@ Rule 101   rindex -> VARIABLE PUNTO RINDEX LPAREN repeCualquier RPAREN
 Rule 102   sublist -> sublistIndex
 Rule 103   sublist -> sublistInicio
 Rule 104   sublist -> sublistFinal
-Rule 105   sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP
-Rule 106   sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP
-Rule 107   sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP
+Rule 105   sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+Rule 106   sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+Rule 107   sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
 Rule 108   readline -> VARIABLE IGUAL READLINE
 Rule 109   readline -> valovar VARIABLE IGUAL READLINE
 Rule 110   prin -> PRINT LPAREN datosprimitivos RPAREN
@@ -148,7 +148,7 @@ FUN                  : 87 88 89 90
 IF                   : 76 77 78
 IGUAL                : 22 23 24 25 26 27 28 29 30 31 32 33 34 108 109
 IN                   : 81 82
-INT                  : 23 26 30 60 105 105 106 107
+INT                  : 23 26 30 60
 LCLASP               : 105 106 107
 LIST                 : 26 27 28
 LISTOF               : 26 27 28 29
@@ -158,7 +158,7 @@ MAYORQUE             : 26 27 28 30 31 32 56
 MENORQUE             : 26 27 28 30 31 32 58
 MINUS                : 
 MOD                  : 
-NUMBER               : 23 35 43 82 82
+NUMBER               : 23 35 43 82 82 105 105 106 107
 OR                   : 
 PAIR                 : 34
 PLUS                 : 112 112
@@ -182,7 +182,7 @@ THEN                 :
 TIMES                : 
 VAL                  : 40
 VAR                  : 39
-VARIABLE             : 22 23 24 25 26 27 28 29 30 31 32 33 34 38 44 48 52 63 78 79 81 81 82 87 88 89 90 95 97 99 101 108 109 112 113
+VARIABLE             : 22 23 24 25 26 27 28 29 30 31 32 33 34 38 44 48 52 63 78 79 81 81 82 87 88 89 90 95 97 99 101 105 106 107 108 109 112 113
 WHEN                 : 79 80
 WHILE                : 
 error                : 
@@ -215,7 +215,7 @@ if                   : 66
 ifBoolean            : 69
 ifComparacion        : 70
 ifVariable           : 71
-lista                : 2 105 106 107
+lista                : 2
 operadoresComp       : 55
 pair                 : 5
 prin                 : 11
@@ -324,9 +324,9 @@ state 0
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -504,9 +504,9 @@ state 3
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -601,9 +601,6 @@ state 3
 state 4
 
     (2) todo -> lista .
-    (105) sublistIndex -> lista . LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> lista . LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> lista . LCLASP INT DOSPUNTOS RCLASP
 
     VARIABLE        reduce using rule 2 (todo -> lista .)
     PRINT           reduce using rule 2 (todo -> lista .)
@@ -618,7 +615,6 @@ state 4
     FOR             reduce using rule 2 (todo -> lista .)
     $end            reduce using rule 2 (todo -> lista .)
     RLLAVE          reduce using rule 2 (todo -> lista .)
-    LCLASP          shift and go to state 55
 
 
 state 5
@@ -862,7 +858,6 @@ state 16
 
     (16) lista -> ListaConTipo .
 
-    LCLASP          reduce using rule 16 (lista -> ListaConTipo .)
     VARIABLE        reduce using rule 16 (lista -> ListaConTipo .)
     PRINT           reduce using rule 16 (lista -> ListaConTipo .)
     PRINTLN         reduce using rule 16 (lista -> ListaConTipo .)
@@ -882,7 +877,6 @@ state 17
 
     (17) lista -> ListaSinTipo .
 
-    LCLASP          reduce using rule 17 (lista -> ListaSinTipo .)
     VARIABLE        reduce using rule 17 (lista -> ListaSinTipo .)
     PRINT           reduce using rule 17 (lista -> ListaSinTipo .)
     PRINTLN         reduce using rule 17 (lista -> ListaSinTipo .)
@@ -991,7 +985,7 @@ state 22
     (32) ConjuntoConTipo -> valovar . VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
     (33) ConjuntoSinTipo -> valovar . VARIABLE IGUAL SETOF LPAREN repeCualquier RPAREN
 
-    VARIABLE        shift and go to state 56
+    VARIABLE        shift and go to state 55
 
 
 state 23
@@ -1001,10 +995,14 @@ state 23
     (95) size -> VARIABLE . PUNTO SIZE
     (101) rindex -> VARIABLE . PUNTO RINDEX LPAREN repeCualquier RPAREN
     (97) contains -> VARIABLE . PUNTO CONTAINS LPAREN datosprimitivos RPAREN
+    (105) sublistIndex -> VARIABLE . LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> VARIABLE . LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> VARIABLE . LCLASP NUMBER DOSPUNTOS RCLASP
 
-    IGUAL           shift and go to state 57
-    PLUS            shift and go to state 58
-    PUNTO           shift and go to state 59
+    IGUAL           shift and go to state 56
+    PLUS            shift and go to state 57
+    PUNTO           shift and go to state 58
+    LCLASP          shift and go to state 59
 
 
 state 24
@@ -1477,16 +1475,6 @@ state 54
 
 state 55
 
-    (105) sublistIndex -> lista LCLASP . INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> lista LCLASP . DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> lista LCLASP . INT DOSPUNTOS RCLASP
-
-    INT             shift and go to state 69
-    DOSPUNTOS       shift and go to state 70
-
-
-state 56
-
     (34) pair -> valovar VARIABLE . IGUAL PAIR LPAREN datosprimitivos COMA datosprimitivos RPAREN
     (109) readline -> valovar VARIABLE . IGUAL READLINE
     (26) ListaConTipo -> valovar VARIABLE . DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
@@ -1502,33 +1490,43 @@ state 56
     (32) ConjuntoConTipo -> valovar VARIABLE . DOSPUNTOS SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
     (33) ConjuntoSinTipo -> valovar VARIABLE . IGUAL SETOF LPAREN repeCualquier RPAREN
 
-    IGUAL           shift and go to state 71
-    DOSPUNTOS       shift and go to state 72
+    IGUAL           shift and go to state 69
+    DOSPUNTOS       shift and go to state 70
+
+
+state 56
+
+    (108) readline -> VARIABLE IGUAL . READLINE
+
+    READLINE        shift and go to state 71
 
 
 state 57
 
-    (108) readline -> VARIABLE IGUAL . READLINE
+    (112) contador -> VARIABLE PLUS . PLUS
 
-    READLINE        shift and go to state 73
+    PLUS            shift and go to state 72
 
 
 state 58
-
-    (112) contador -> VARIABLE PLUS . PLUS
-
-    PLUS            shift and go to state 74
-
-
-state 59
 
     (95) size -> VARIABLE PUNTO . SIZE
     (101) rindex -> VARIABLE PUNTO . RINDEX LPAREN repeCualquier RPAREN
     (97) contains -> VARIABLE PUNTO . CONTAINS LPAREN datosprimitivos RPAREN
 
-    SIZE            shift and go to state 75
-    RINDEX          shift and go to state 76
-    CONTAINS        shift and go to state 77
+    SIZE            shift and go to state 73
+    RINDEX          shift and go to state 74
+    CONTAINS        shift and go to state 75
+
+
+state 59
+
+    (105) sublistIndex -> VARIABLE LCLASP . NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> VARIABLE LCLASP . DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> VARIABLE LCLASP . NUMBER DOSPUNTOS RCLASP
+
+    NUMBER          shift and go to state 76
+    DOSPUNTOS       shift and go to state 77
 
 
 state 60
@@ -1692,9 +1690,9 @@ state 66
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -1798,21 +1796,6 @@ state 68
 
 state 69
 
-    (105) sublistIndex -> lista LCLASP INT . DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> lista LCLASP INT . DOSPUNTOS RCLASP
-
-    DOSPUNTOS       shift and go to state 95
-
-
-state 70
-
-    (106) sublistInicio -> lista LCLASP DOSPUNTOS . INT RCLASP
-
-    INT             shift and go to state 96
-
-
-state 71
-
     (34) pair -> valovar VARIABLE IGUAL . PAIR LPAREN datosprimitivos COMA datosprimitivos RPAREN
     (109) readline -> valovar VARIABLE IGUAL . READLINE
     (29) ListaSinTipo -> valovar VARIABLE IGUAL . LISTOF LPAREN repeCualquier RPAREN
@@ -1823,18 +1806,18 @@ state 71
     (37) datosprimitivos -> . BOOLEANPALABRA
     (38) datosprimitivos -> . VARIABLE
 
-    PAIR            shift and go to state 97
-    READLINE        shift and go to state 99
-    LISTOF          shift and go to state 100
-    SETOF           shift and go to state 101
+    PAIR            shift and go to state 95
+    READLINE        shift and go to state 97
+    LISTOF          shift and go to state 98
+    SETOF           shift and go to state 99
     NUMBER          shift and go to state 79
     STRINGPALABRA   shift and go to state 80
     BOOLEANPALABRA  shift and go to state 81
     VARIABLE        shift and go to state 82
 
-    datosprimitivos                shift and go to state 98
+    datosprimitivos                shift and go to state 96
 
-state 72
+state 70
 
     (26) ListaConTipo -> valovar VARIABLE DOSPUNTOS . LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
     (27) ListaConTipo -> valovar VARIABLE DOSPUNTOS . LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
@@ -1846,14 +1829,14 @@ state 72
     (31) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS . SET MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
     (32) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS . SET MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
 
-    LIST            shift and go to state 102
-    STRING          shift and go to state 104
-    INT             shift and go to state 103
-    BOOLEAN         shift and go to state 105
-    SET             shift and go to state 106
+    LIST            shift and go to state 100
+    STRING          shift and go to state 102
+    INT             shift and go to state 101
+    BOOLEAN         shift and go to state 103
+    SET             shift and go to state 104
 
 
-state 73
+state 71
 
     (108) readline -> VARIABLE IGUAL READLINE .
 
@@ -1872,7 +1855,7 @@ state 73
     RLLAVE          reduce using rule 108 (readline -> VARIABLE IGUAL READLINE .)
 
 
-state 74
+state 72
 
     (112) contador -> VARIABLE PLUS PLUS .
 
@@ -1891,7 +1874,7 @@ state 74
     RLLAVE          reduce using rule 112 (contador -> VARIABLE PLUS PLUS .)
 
 
-state 75
+state 73
 
     (95) size -> VARIABLE PUNTO SIZE .
 
@@ -1910,18 +1893,33 @@ state 75
     RLLAVE          reduce using rule 95 (size -> VARIABLE PUNTO SIZE .)
 
 
-state 76
+state 74
 
     (101) rindex -> VARIABLE PUNTO RINDEX . LPAREN repeCualquier RPAREN
 
-    LPAREN          shift and go to state 107
+    LPAREN          shift and go to state 105
+
+
+state 75
+
+    (97) contains -> VARIABLE PUNTO CONTAINS . LPAREN datosprimitivos RPAREN
+
+    LPAREN          shift and go to state 106
+
+
+state 76
+
+    (105) sublistIndex -> VARIABLE LCLASP NUMBER . DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> VARIABLE LCLASP NUMBER . DOSPUNTOS RCLASP
+
+    DOSPUNTOS       shift and go to state 107
 
 
 state 77
 
-    (97) contains -> VARIABLE PUNTO CONTAINS . LPAREN datosprimitivos RPAREN
+    (106) sublistInicio -> VARIABLE LCLASP DOSPUNTOS . NUMBER RCLASP
 
-    LPAREN          shift and go to state 108
+    NUMBER          shift and go to state 108
 
 
 state 78
@@ -2136,28 +2134,12 @@ state 94
 
 state 95
 
-    (105) sublistIndex -> lista LCLASP INT DOSPUNTOS . INT RCLASP
-    (107) sublistFinal -> lista LCLASP INT DOSPUNTOS . RCLASP
+    (34) pair -> valovar VARIABLE IGUAL PAIR . LPAREN datosprimitivos COMA datosprimitivos RPAREN
 
-    INT             shift and go to state 131
-    RCLASP          shift and go to state 132
+    LPAREN          shift and go to state 131
 
 
 state 96
-
-    (106) sublistInicio -> lista LCLASP DOSPUNTOS INT . RCLASP
-
-    RCLASP          shift and go to state 133
-
-
-state 97
-
-    (34) pair -> valovar VARIABLE IGUAL PAIR . LPAREN datosprimitivos COMA datosprimitivos RPAREN
-
-    LPAREN          shift and go to state 134
-
-
-state 98
 
     (25) variableSinTipo -> valovar VARIABLE IGUAL datosprimitivos .
 
@@ -2176,7 +2158,7 @@ state 98
     RLLAVE          reduce using rule 25 (variableSinTipo -> valovar VARIABLE IGUAL datosprimitivos .)
 
 
-state 99
+state 97
 
     (109) readline -> valovar VARIABLE IGUAL READLINE .
 
@@ -2195,60 +2177,60 @@ state 99
     RLLAVE          reduce using rule 109 (readline -> valovar VARIABLE IGUAL READLINE .)
 
 
-state 100
+state 98
 
     (29) ListaSinTipo -> valovar VARIABLE IGUAL LISTOF . LPAREN repeCualquier RPAREN
 
-    LPAREN          shift and go to state 135
+    LPAREN          shift and go to state 132
 
 
-state 101
+state 99
 
     (33) ConjuntoSinTipo -> valovar VARIABLE IGUAL SETOF . LPAREN repeCualquier RPAREN
 
-    LPAREN          shift and go to state 136
+    LPAREN          shift and go to state 133
 
 
-state 102
+state 100
 
     (26) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST . MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
     (27) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST . MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
     (28) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST . MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN
 
-    MENORQUE        shift and go to state 137
+    MENORQUE        shift and go to state 134
+
+
+state 101
+
+    (23) variableConTipo -> valovar VARIABLE DOSPUNTOS INT . IGUAL NUMBER
+
+    IGUAL           shift and go to state 135
+
+
+state 102
+
+    (22) variableConTipo -> valovar VARIABLE DOSPUNTOS STRING . IGUAL STRINGPALABRA
+
+    IGUAL           shift and go to state 136
 
 
 state 103
 
-    (23) variableConTipo -> valovar VARIABLE DOSPUNTOS INT . IGUAL NUMBER
+    (24) variableConTipo -> valovar VARIABLE DOSPUNTOS BOOLEAN . IGUAL
 
-    IGUAL           shift and go to state 138
+    IGUAL           shift and go to state 137
 
 
 state 104
-
-    (22) variableConTipo -> valovar VARIABLE DOSPUNTOS STRING . IGUAL STRINGPALABRA
-
-    IGUAL           shift and go to state 139
-
-
-state 105
-
-    (24) variableConTipo -> valovar VARIABLE DOSPUNTOS BOOLEAN . IGUAL
-
-    IGUAL           shift and go to state 140
-
-
-state 106
 
     (30) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET . MENORQUE INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
     (31) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET . MENORQUE STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
     (32) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET . MENORQUE BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
 
-    MENORQUE        shift and go to state 141
+    MENORQUE        shift and go to state 138
 
 
-state 107
+state 105
 
     (101) rindex -> VARIABLE PUNTO RINDEX LPAREN . repeCualquier RPAREN
     (53) repeCualquier -> . datosprimitivos
@@ -2263,10 +2245,10 @@ state 107
     BOOLEANPALABRA  shift and go to state 81
     VARIABLE        shift and go to state 82
 
-    repeCualquier                  shift and go to state 142
-    datosprimitivos                shift and go to state 143
+    repeCualquier                  shift and go to state 139
+    datosprimitivos                shift and go to state 140
 
-state 108
+state 106
 
     (97) contains -> VARIABLE PUNTO CONTAINS LPAREN . datosprimitivos RPAREN
     (35) datosprimitivos -> . NUMBER
@@ -2279,7 +2261,23 @@ state 108
     BOOLEANPALABRA  shift and go to state 81
     VARIABLE        shift and go to state 82
 
-    datosprimitivos                shift and go to state 144
+    datosprimitivos                shift and go to state 141
+
+state 107
+
+    (105) sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS . NUMBER RCLASP
+    (107) sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS . RCLASP
+
+    NUMBER          shift and go to state 142
+    RCLASP          shift and go to state 143
+
+
+state 108
+
+    (106) sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER . RCLASP
+
+    RCLASP          shift and go to state 144
+
 
 state 109
 
@@ -2335,7 +2333,7 @@ state 111
     VARIABLE        shift and go to state 82
 
     repeCualquier                  shift and go to state 145
-    datosprimitivos                shift and go to state 143
+    datosprimitivos                shift and go to state 140
 
 state 112
 
@@ -2504,51 +2502,6 @@ state 130
 
 state 131
 
-    (105) sublistIndex -> lista LCLASP INT DOSPUNTOS INT . RCLASP
-
-    RCLASP          shift and go to state 161
-
-
-state 132
-
-    (107) sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .
-
-    VARIABLE        reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    PRINT           reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    PRINTLN         reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    RETURN          reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    VAR             reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    VAL             reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    STRINGPALABRA   reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    FUN             reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    IF              reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    WHEN            reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    FOR             reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    $end            reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-    RLLAVE          reduce using rule 107 (sublistFinal -> lista LCLASP INT DOSPUNTOS RCLASP .)
-
-
-state 133
-
-    (106) sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .
-
-    VARIABLE        reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    PRINT           reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    PRINTLN         reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    RETURN          reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    VAR             reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    VAL             reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    STRINGPALABRA   reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    FUN             reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    IF              reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    WHEN            reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    FOR             reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    $end            reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-    RLLAVE          reduce using rule 106 (sublistInicio -> lista LCLASP DOSPUNTOS INT RCLASP .)
-
-
-state 134
-
     (34) pair -> valovar VARIABLE IGUAL PAIR LPAREN . datosprimitivos COMA datosprimitivos RPAREN
     (35) datosprimitivos -> . NUMBER
     (36) datosprimitivos -> . STRINGPALABRA
@@ -2560,9 +2513,9 @@ state 134
     BOOLEANPALABRA  shift and go to state 81
     VARIABLE        shift and go to state 82
 
-    datosprimitivos                shift and go to state 162
+    datosprimitivos                shift and go to state 161
 
-state 135
+state 132
 
     (29) ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN . repeCualquier RPAREN
     (53) repeCualquier -> . datosprimitivos
@@ -2577,10 +2530,10 @@ state 135
     BOOLEANPALABRA  shift and go to state 81
     VARIABLE        shift and go to state 82
 
-    repeCualquier                  shift and go to state 163
-    datosprimitivos                shift and go to state 143
+    repeCualquier                  shift and go to state 162
+    datosprimitivos                shift and go to state 140
 
-state 136
+state 133
 
     (33) ConjuntoSinTipo -> valovar VARIABLE IGUAL SETOF LPAREN . repeCualquier RPAREN
     (53) repeCualquier -> . datosprimitivos
@@ -2595,35 +2548,35 @@ state 136
     BOOLEANPALABRA  shift and go to state 81
     VARIABLE        shift and go to state 82
 
-    repeCualquier                  shift and go to state 164
-    datosprimitivos                shift and go to state 143
+    repeCualquier                  shift and go to state 163
+    datosprimitivos                shift and go to state 140
 
-state 137
+state 134
 
     (26) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE . INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
     (27) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE . STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
     (28) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE . BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN
 
-    INT             shift and go to state 165
-    STRING          shift and go to state 166
-    BOOLEAN         shift and go to state 167
+    INT             shift and go to state 164
+    STRING          shift and go to state 165
+    BOOLEAN         shift and go to state 166
 
 
-state 138
+state 135
 
     (23) variableConTipo -> valovar VARIABLE DOSPUNTOS INT IGUAL . NUMBER
 
-    NUMBER          shift and go to state 168
+    NUMBER          shift and go to state 167
 
 
-state 139
+state 136
 
     (22) variableConTipo -> valovar VARIABLE DOSPUNTOS STRING IGUAL . STRINGPALABRA
 
-    STRINGPALABRA   shift and go to state 169
+    STRINGPALABRA   shift and go to state 168
 
 
-state 140
+state 137
 
     (24) variableConTipo -> valovar VARIABLE DOSPUNTOS BOOLEAN IGUAL .
 
@@ -2642,38 +2595,83 @@ state 140
     RLLAVE          reduce using rule 24 (variableConTipo -> valovar VARIABLE DOSPUNTOS BOOLEAN IGUAL .)
 
 
-state 141
+state 138
 
     (30) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE . INT MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
     (31) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE . STRING MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
     (32) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE . BOOLEAN MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
 
-    INT             shift and go to state 170
-    STRING          shift and go to state 171
-    BOOLEAN         shift and go to state 172
+    INT             shift and go to state 169
+    STRING          shift and go to state 170
+    BOOLEAN         shift and go to state 171
 
 
-state 142
+state 139
 
     (101) rindex -> VARIABLE PUNTO RINDEX LPAREN repeCualquier . RPAREN
 
-    RPAREN          shift and go to state 173
+    RPAREN          shift and go to state 172
 
 
-state 143
+state 140
 
     (53) repeCualquier -> datosprimitivos .
     (54) repeCualquier -> datosprimitivos . COMA repeCualquier
 
     RPAREN          reduce using rule 53 (repeCualquier -> datosprimitivos .)
-    COMA            shift and go to state 174
+    COMA            shift and go to state 173
+
+
+state 141
+
+    (97) contains -> VARIABLE PUNTO CONTAINS LPAREN datosprimitivos . RPAREN
+
+    RPAREN          shift and go to state 174
+
+
+state 142
+
+    (105) sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER . RCLASP
+
+    RCLASP          shift and go to state 175
+
+
+state 143
+
+    (107) sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .
+
+    VARIABLE        reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    PRINT           reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    PRINTLN         reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    RETURN          reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    VAR             reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    VAL             reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    STRINGPALABRA   reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    FUN             reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    IF              reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    WHEN            reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    FOR             reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    $end            reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
+    RLLAVE          reduce using rule 107 (sublistFinal -> VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP .)
 
 
 state 144
 
-    (97) contains -> VARIABLE PUNTO CONTAINS LPAREN datosprimitivos . RPAREN
+    (106) sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .
 
-    RPAREN          shift and go to state 175
+    VARIABLE        reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    PRINT           reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    PRINTLN         reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    RETURN          reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    VAR             reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    VAL             reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    STRINGPALABRA   reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    FUN             reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    IF              reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    WHEN            reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    FOR             reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    $end            reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
+    RLLAVE          reduce using rule 106 (sublistInicio -> VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP .)
 
 
 state 145
@@ -2786,9 +2784,9 @@ state 149
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -2986,9 +2984,9 @@ state 153
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -3151,9 +3149,9 @@ state 154
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -3316,9 +3314,9 @@ state 155
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -3496,9 +3494,9 @@ state 158
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -3601,66 +3599,47 @@ state 160
 
 state 161
 
-    (105) sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .
-
-    VARIABLE        reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    PRINT           reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    PRINTLN         reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    RETURN          reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    VAR             reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    VAL             reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    STRINGPALABRA   reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    FUN             reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    IF              reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    WHEN            reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    FOR             reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    $end            reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-    RLLAVE          reduce using rule 105 (sublistIndex -> lista LCLASP INT DOSPUNTOS INT RCLASP .)
-
-
-state 162
-
     (34) pair -> valovar VARIABLE IGUAL PAIR LPAREN datosprimitivos . COMA datosprimitivos RPAREN
 
     COMA            shift and go to state 190
 
 
-state 163
+state 162
 
     (29) ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier . RPAREN
 
     RPAREN          shift and go to state 191
 
 
-state 164
+state 163
 
     (33) ConjuntoSinTipo -> valovar VARIABLE IGUAL SETOF LPAREN repeCualquier . RPAREN
 
     RPAREN          shift and go to state 192
 
 
-state 165
+state 164
 
     (26) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT . MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN
 
     MAYORQUE        shift and go to state 193
 
 
-state 166
+state 165
 
     (27) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING . MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN
 
     MAYORQUE        shift and go to state 194
 
 
-state 167
+state 166
 
     (28) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN . MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN
 
     MAYORQUE        shift and go to state 195
 
 
-state 168
+state 167
 
     (23) variableConTipo -> valovar VARIABLE DOSPUNTOS INT IGUAL NUMBER .
 
@@ -3679,7 +3658,7 @@ state 168
     RLLAVE          reduce using rule 23 (variableConTipo -> valovar VARIABLE DOSPUNTOS INT IGUAL NUMBER .)
 
 
-state 169
+state 168
 
     (22) variableConTipo -> valovar VARIABLE DOSPUNTOS STRING IGUAL STRINGPALABRA .
 
@@ -3698,28 +3677,28 @@ state 169
     RLLAVE          reduce using rule 22 (variableConTipo -> valovar VARIABLE DOSPUNTOS STRING IGUAL STRINGPALABRA .)
 
 
-state 170
+state 169
 
     (30) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE INT . MAYORQUE IGUAL SETOF LPAREN repeInt RPAREN
 
     MAYORQUE        shift and go to state 196
 
 
-state 171
+state 170
 
     (31) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE STRING . MAYORQUE IGUAL SETOF LPAREN repeString RPAREN
 
     MAYORQUE        shift and go to state 197
 
 
-state 172
+state 171
 
     (32) ConjuntoConTipo -> valovar VARIABLE DOSPUNTOS SET MENORQUE BOOLEAN . MAYORQUE IGUAL SETOF LPAREN repeBool RPAREN
 
     MAYORQUE        shift and go to state 198
 
 
-state 173
+state 172
 
     (101) rindex -> VARIABLE PUNTO RINDEX LPAREN repeCualquier RPAREN .
 
@@ -3738,7 +3717,7 @@ state 173
     RLLAVE          reduce using rule 101 (rindex -> VARIABLE PUNTO RINDEX LPAREN repeCualquier RPAREN .)
 
 
-state 174
+state 173
 
     (54) repeCualquier -> datosprimitivos COMA . repeCualquier
     (53) repeCualquier -> . datosprimitivos
@@ -3753,10 +3732,10 @@ state 174
     BOOLEANPALABRA  shift and go to state 81
     VARIABLE        shift and go to state 82
 
-    datosprimitivos                shift and go to state 143
+    datosprimitivos                shift and go to state 140
     repeCualquier                  shift and go to state 199
 
-state 175
+state 174
 
     (97) contains -> VARIABLE PUNTO CONTAINS LPAREN datosprimitivos RPAREN .
 
@@ -3773,6 +3752,25 @@ state 175
     FOR             reduce using rule 97 (contains -> VARIABLE PUNTO CONTAINS LPAREN datosprimitivos RPAREN .)
     $end            reduce using rule 97 (contains -> VARIABLE PUNTO CONTAINS LPAREN datosprimitivos RPAREN .)
     RLLAVE          reduce using rule 97 (contains -> VARIABLE PUNTO CONTAINS LPAREN datosprimitivos RPAREN .)
+
+
+state 175
+
+    (105) sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .
+
+    VARIABLE        reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    PRINT           reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    PRINTLN         reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    RETURN          reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    VAR             reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    VAL             reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    STRINGPALABRA   reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    FUN             reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    IF              reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    WHEN            reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    FOR             reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    $end            reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
+    RLLAVE          reduce using rule 105 (sublistIndex -> VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP .)
 
 
 state 176
@@ -3935,9 +3933,9 @@ state 182
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -4092,7 +4090,6 @@ state 191
 
     (29) ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier RPAREN .
 
-    LCLASP          reduce using rule 29 (ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier RPAREN .)
     VARIABLE        reduce using rule 29 (ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier RPAREN .)
     PRINT           reduce using rule 29 (ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier RPAREN .)
     PRINTLN         reduce using rule 29 (ListaSinTipo -> valovar VARIABLE IGUAL LISTOF LPAREN repeCualquier RPAREN .)
@@ -4252,9 +4249,9 @@ state 200
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -4526,9 +4523,9 @@ state 208
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -4754,9 +4751,9 @@ state 218
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -5196,9 +5193,9 @@ state 243
     (87) funConSalida -> . FUN VARIABLE LPAREN repeArg RPAREN DOSPUNTOS tipoDato LLLAVE repetodo RLLAVE
     (90) funSinSalidaArg -> . FUN VARIABLE LPAREN RPAREN LLLAVE repetodo RLLAVE
     (88) funSinSalida -> . FUN VARIABLE LPAREN repeArg RPAREN LLLAVE repetodo RLLAVE
-    (105) sublistIndex -> . lista LCLASP INT DOSPUNTOS INT RCLASP
-    (106) sublistInicio -> . lista LCLASP DOSPUNTOS INT RCLASP
-    (107) sublistFinal -> . lista LCLASP INT DOSPUNTOS RCLASP
+    (105) sublistIndex -> . VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP
+    (106) sublistInicio -> . VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP
+    (107) sublistFinal -> . VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP
     (76) ifBoolean -> . IF LPAREN BOOLEANPALABRA RPAREN LLLAVE repetodo RLLAVE
     (77) ifComparacion -> . IF LPAREN comparacion RPAREN LLLAVE repetodo RLLAVE
     (78) ifVariable -> . IF LPAREN VARIABLE RPAREN LLLAVE repetodo RLLAVE
@@ -5386,7 +5383,6 @@ state 256
 
     (26) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN .
 
-    LCLASP          reduce using rule 26 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN .)
     VARIABLE        reduce using rule 26 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN .)
     PRINT           reduce using rule 26 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN .)
     PRINTLN         reduce using rule 26 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN .)
@@ -5420,7 +5416,6 @@ state 258
 
     (27) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN .
 
-    LCLASP          reduce using rule 27 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN .)
     VARIABLE        reduce using rule 27 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN .)
     PRINT           reduce using rule 27 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN .)
     PRINTLN         reduce using rule 27 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE STRING MAYORQUE IGUAL LISTOF LPAREN repeString RPAREN .)
@@ -5454,7 +5449,6 @@ state 260
 
     (28) ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN .
 
-    LCLASP          reduce using rule 28 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN .)
     VARIABLE        reduce using rule 28 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN .)
     PRINT           reduce using rule 28 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN .)
     PRINTLN         reduce using rule 28 (ListaConTipo -> valovar VARIABLE DOSPUNTOS LIST MENORQUE BOOLEAN MAYORQUE IGUAL LISTOF repeBool LPAREN RPAREN .)

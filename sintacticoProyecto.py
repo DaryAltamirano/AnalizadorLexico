@@ -273,13 +273,13 @@ def p_sublist(p):
               | sublistFinal'''
 
 def p_sublistIndex(p):
-    'sublistIndex : lista LCLASP INT DOSPUNTOS INT RCLASP'
+    'sublistIndex : VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP'
 
 def p_sublistDefectoInicio(p):
-    'sublistInicio : lista LCLASP DOSPUNTOS INT RCLASP'
+    'sublistInicio : VARIABLE LCLASP DOSPUNTOS NUMBER RCLASP'
 
 def p_sublistDefectoFinal(p):
-    'sublistFinal : lista LCLASP INT DOSPUNTOS RCLASP'
+    'sublistFinal : VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP'
 
 
 def p_readlin(p):
