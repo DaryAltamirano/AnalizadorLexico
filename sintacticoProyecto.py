@@ -69,7 +69,8 @@ def p_variableConTipoBool(p):
     'variableConTipo :  valovar VARIABLE DOSPUNTOS BOOLEAN IGUAL '
 # Variable sin tipo 
 def p_variableSinTipo(p):
-     'variableSinTipo : valovar VARIABLE IGUAL datosprimitivos ' 
+     '''variableSinTipo : valovar VARIABLE IGUAL datosprimitivos
+                        | valovar VARIABLE IGUAL repeOper'''
 #################################################LISTAS#######################################################
 
 # val primos: List<Int> = listOf (2)
@@ -270,7 +271,8 @@ def p_lastindexof(p):
 def p_sublist(p):
     '''sublist : sublistIndex
               | sublistInicio
-              | sublistFinal'''
+              | sublistFinal
+              | sublistVar'''
 
 def p_sublistIndex(p):
     'sublistIndex : VARIABLE LCLASP NUMBER DOSPUNTOS NUMBER RCLASP'
@@ -281,6 +283,8 @@ def p_sublistDefectoInicio(p):
 def p_sublistDefectoFinal(p):
     'sublistFinal : VARIABLE LCLASP NUMBER DOSPUNTOS RCLASP'
 
+def p_sublistVariable(p):
+    'sublistVar : VARIABLE LCLASP VARIABLE RCLASP '
 
 def p_readlin(p):
     '''readline : VARIABLE IGUAL READLINE
@@ -299,6 +303,35 @@ def p_return(p):
     ''' retor : RETURN VARIABLE'''
 
 
+def p_repetirOperacion(p):
+    '''repeOper : operacion'''
+
+
+def p_repetirOperacionTodo(p):
+    '''repeOper : operacion repeOper'''
+
+
+def p_operacion(p):
+    '''operacion : suma
+                | resta
+                | multiplicacion
+                | division'''
+
+
+def p_suma(p):
+    '''suma : NUMBER PLUS NUMBER'''
+
+
+def p_resta(p):
+    '''resta : NUMBER MINUS NUMBER'''
+
+
+def p_multiplicacion(p):
+    '''multiplicacion : NUMBER TIMES NUMBER'''
+
+
+def p_division(p):
+    '''division : NUMBER DIVIDE NUMBER'''
 
 def p_error(p):
     global textoSalida
